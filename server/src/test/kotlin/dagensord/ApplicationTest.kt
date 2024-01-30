@@ -1,0 +1,4 @@
+package dagensord
+
+class ApplicationTest {
+}
