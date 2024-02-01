@@ -14,7 +14,7 @@ val supabase = createSupabaseClient(
 ) {
     defaultSerializer = KotlinXSerializer()
     install(Postgrest) {
-        defaultSchema = "schema" // default: "public"
+        defaultSchema = "public" // default: "public"
         propertyConversionMethod = PropertyConversionMethod.SERIAL_NAME // default: PropertyConversionMethod.CAMEL_CASE_TO_SNAKE_CASE
     }
 }
