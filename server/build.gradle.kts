@@ -29,6 +29,7 @@ dependencies {
     implementation("io.ktor:ktor-client-apache:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation ("io.github.jan-tennert.supabase:postgrest-kt:$supabase_version")
+    implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
