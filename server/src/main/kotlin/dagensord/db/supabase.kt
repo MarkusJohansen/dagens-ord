@@ -4,11 +4,13 @@ import io.github.jan.supabase.createSupabaseClient
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.PropertyConversionMethod
 import io.github.jan.supabase.serializer.KotlinXSerializer
+import io.github.cdimascio.dotenv.dotenv
 
+val dotenv = dotenv()
 
 val supabase = createSupabaseClient(
-    supabaseUrl = "",
-    supabaseKey = ""
+    supabaseUrl = dotenv["URL"],
+    supabaseKey = dotenv["PUBLIC_ANON_KEY"]
 ) {
     defaultSerializer = KotlinXSerializer()
     install(Postgrest) {
