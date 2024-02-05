@@ -3,7 +3,6 @@ package dagensord.plugins
 import dagensord.db.supabase
 import dagensord.model.Expression
 import io.github.jan.supabase.postgrest.from
-import io.github.jan.supabase.postgrest.query.Columns
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -17,9 +16,9 @@ fun Application.configureRouting() {
 
         get("/expressions") {
             try {
-                val expression = supabase.from("expressions").select().decodeList<Expression>()
-                call.respond(HttpStatusCode.OK, expression)
-                println(expression)
+                val expressions = supabase.from("expressions").select().decodeList<Expression>()
+                call.respond(HttpStatusCode.OK, expressions.toString())
+                println(expressions.toString())
             } catch (e: Exception) {
                 call.respond(HttpStatusCode.OK, e.message.toString())
             }

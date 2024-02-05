@@ -10,7 +10,7 @@ val dotenv = dotenv()
 
 val supabase = createSupabaseClient(
     supabaseUrl = dotenv["URL"],
-    supabaseKey = dotenv["PUBLIC_ANON_KEY"]
+    supabaseKey = dotenv["SERVICE_ROLE_KEY"]
 ) {
     defaultSerializer = KotlinXSerializer()
     install(Postgrest) {

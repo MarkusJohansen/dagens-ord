@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 data class Expression (
     val id: Int,
     val expression: String,
-    val example: String,
-    val definition: String
+    val example: String?,
+    val definition: String?,
 ) {
     override fun toString(): String {
         return "Expression(\n${id}\n${expression}\n${example}\n${definition}\n)"
