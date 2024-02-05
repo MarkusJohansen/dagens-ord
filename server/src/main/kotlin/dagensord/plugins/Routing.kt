@@ -24,14 +24,5 @@ fun Application.configureRouting() {
             }
         }
 
-        post("/insert_expressions") {
-            try {
-                val expression = Expression(expression = "Gutta tester", example = "", definition = "", id=9999)
-                supabase.from("expression").insert(expression)
-            } catch (e: Exception) {
-                call.respond(HttpStatusCode.OK, e.message.toString())
-            }
-        }
-
     }
 }
