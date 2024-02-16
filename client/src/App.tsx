@@ -1,15 +1,22 @@
+import { GetNewExpression } from "./api/getNewExpression";
 import Expression from "./components/expression";
 import Navbar from "./components/navbar";
 
-const word = "Apostlenes hester";
-const example = "Dette er et eksempel på ordet";
-const explanation = "Dette er en forklaring på ordet";
+async function App() {
+  const { expression } = await GetNewExpression();
 
-function App() {
   return (
     <main className="flex flex-col mx-40">
       <Navbar />
-      <Expression word={word} example={example} explanation={explanation} />
+      {!expression ? (
+        <h1>Loading...</h1>
+      ) : (
+        <Expression
+          word={expression.expression}
+          example={expression.example}
+          explanation={expression.definition}
+        />
+      )}
     </main>
   );
 }
