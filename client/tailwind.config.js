@@ -2,6 +2,7 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: { 'logo': ['Playfair Display'] },
     extend: {},
   },
   plugins: [],
