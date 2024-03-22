@@ -9,9 +9,12 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.plugins.cors.routing.*
+import java.time.LocalDate
+
 fun Application.configureRouting() {
 
-    val expressionRepository = ExpressionRepository()
+    val expressionRepository = ExpressionRepository();
+    var referenceTime = LocalDate.now();
     var cachedExpression = Expression(0, "dummy expression", "dummy example", "dummy definition");
 
     install(CORS) {
@@ -35,11 +38,13 @@ fun Application.configureRouting() {
                 call.respond(HttpStatusCode.OK, e.message.toString())
             }
         }
-        get("/new") {
+        get("/get") {
             try {
-                val expression = expressionRepository.getRandom(cachedExpression)
-                cachedExpression = expression
-                call.respond(HttpStatusCode.OK, expression.toString())
+                if (LocalDate.now() != referenceTime || cachedExpression.id == 0) {
+                    referenceTime = LocalDate.now()
+                    cachedExpression = expressionRepository.getRandom(cachedExpression)
+                }
+                call.respond(HttpStatusCode.OK, cachedExpression.toString())
             } catch (e: Exception) {
                 call.respond(HttpStatusCode.OK, e.message.toString())
             }
