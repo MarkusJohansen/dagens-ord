@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { SuggestionForm } from "./suggestionForm";
+import { DisplaySidebarContext } from "../contexts/displaySidebarContext";
 
 export const Sidebar = () => {
-  const [displaySidebar, setDisplaySidebar] = useState(true); //TODO: exchange for a context value
+  const { displaySidebar, toggleSidebar } = useContext(DisplaySidebarContext);
   const [contentColor] = useState("white"); //TODO: exchange for a context value
 
   return (
@@ -11,7 +12,7 @@ export const Sidebar = () => {
         !displaySidebar && "animate-slide-out"
       }`}
     >
-      <button onClick={() => setDisplaySidebar(!displaySidebar)}>button</button>
+      <button onClick={() => toggleSidebar()}>button</button>
       <div className="flex flex-col gap-20">
         <div>
           <h2 className={`text-${contentColor}`}>Bidra</h2>

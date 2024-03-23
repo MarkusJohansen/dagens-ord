@@ -1,9 +1,13 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import logo from "../img/logo.png";
+import { useContext } from "react";
+import { DisplaySidebarContext } from "../contexts/displaySidebarContext";
 
 const Navbar = () => {
+  const { toggleSidebar } = useContext(DisplaySidebarContext);
   return (
     <nav className="flex flex-row w-full justify-between py-4">
+      <button onClick={toggleSidebar}>show sidebar</button>
       <RxHamburgerMenu size={35} />
       <a
         href="/"
