@@ -4,7 +4,7 @@ interface ExpressionProps {
   explanation: string;
 }
 
-const Expression = (props: ExpressionProps) => {
+export const Expression = (props: ExpressionProps) => {
   const { word, example, explanation } = props;
 
   return (
@@ -16,5 +16,3 @@ const Expression = (props: ExpressionProps) => {
     </div>
   );
 };
-
-export default Expression;

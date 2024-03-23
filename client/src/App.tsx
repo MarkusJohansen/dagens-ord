@@ -1,22 +1,13 @@
-import { GetNewExpression } from "./api/getNewExpression";
-import Expression from "./components/expression";
 import Navbar from "./components/navbar";
+import { Sidebar } from "./components/sidebar";
 
-async function App() {
-  const { expression } = await GetNewExpression();
-
+function App() {
   return (
-    <main className="flex flex-col mx-40">
-      <Navbar />
-      {!expression ? (
-        <h1>Loading...</h1>
-      ) : (
-        <Expression
-          word={expression.expression}
-          example={expression.example}
-          explanation={expression.definition}
-        />
-      )}
+    <main className="relative">
+      <header className="flex flex-col mx-40">
+        <Navbar />
+      </header>
+      <Sidebar />
     </main>
   );
 }
