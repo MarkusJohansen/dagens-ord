@@ -1,5 +1,3 @@
-import { GetNewExpression } from "./api/getNewExpression";
-import Expression from "./components/expression";
 import Navbar from "./components/navbar";
 import { Sidebar } from "./components/sidebar";
 import { DisplaySidebarProvider } from "./contexts/displaySidebarContext";
