@@ -39,15 +39,12 @@ export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({
 
     updateColor(); // Initial color update
 
-    // const intervalId = setInterval(updateColor, 24 * 60 * 60 * 1000); // Update color every 24 hours
-    const intervalId = setInterval(updateColor, 1000); // Update color every 24 hours
+    const intervalId = setInterval(updateColor, 24 * 60 * 60 * 1000); // Update color every 24 hours
 
     return () => {
       clearInterval(intervalId); // Clear interval on component unmount
     };
   }, []);
-
-  console.log(color);
 
   return (
     <ColorContext.Provider value={{ color }}>{children}</ColorContext.Provider>
