@@ -2,13 +2,13 @@ import { GetNewExpression } from "./api/getNewExpression";
 import Expression from "./components/expression";
 import Navbar from "./components/navbar";
 
-async function App() {
-  const { expression } = await GetNewExpression();
+function App() {
+  const { expression, isLoading } = GetNewExpression();
 
   return (
     <main className="flex flex-col mx-40">
       <Navbar />
-      {!expression ? (
+      {isLoading || !expression ? (
         <h1>Loading...</h1>
       ) : (
         <Expression
