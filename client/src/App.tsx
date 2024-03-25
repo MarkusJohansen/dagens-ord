@@ -10,7 +10,7 @@ function App() {
   return (
     <div
       style={{
-        backgroundColor: `${color}`,
+        backgroundColor: color,
       }}
       className={`h-screen`}
     >
