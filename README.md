@@ -6,7 +6,7 @@ Dagens ord er en nettside som serverer deg et nytt morsomt ord eller utrykk hver
 
 ## Teknologi 🧑‍💻
 
-Klient applikasjonen er hovedsaklig bygget på typescript `react` med `tailwindCSS` på toppen av classless css rammeverket `ChimeraCSS` for styling. Server applikasjonen er en kotlin `Ktor` server, som bruker `Supabase kotlin SDK` som en ORM mot vår `Supabase` database.
+Klient applikasjonen er hovedsaklig bygget på typescript `react` med `tailwindCSS` på toppen av classless css rammeverket `ChimeraCSS` for styling. Server applikasjonen er en kotlin `Ktor` server, som bruker `Supabase kotlin SDK` som en ORM mot vår `Supabase` database (Ja, vi vet at dette er å skyte spurv med kanon).
 
 Liste over teknologier:
 
