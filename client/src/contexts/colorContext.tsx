@@ -11,11 +11,11 @@ export const ColorContext = createContext<ColorContextType>({
 export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [color, setColor] = useState("red-500");
+  const [color, setColor] = useState("#bae6fd");
 
   useEffect(() => {
     const colors = [
-      "#fffff", // white
+      "#ffffff", // white
       "#fecaca", // red-200
       "#fed7aa", // orange-200
       "#fde68a", // amber-200
