@@ -2,7 +2,6 @@ val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val supabase_version: String by project
-val postgresql_version: String by project
 
 plugins {
     kotlin("jvm") version "1.9.22"
@@ -34,5 +33,4 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     implementation("io.ktor:ktor-server-cors:$ktor_version")
-    implementation("org.postgresql:postgresql:$postgresql_version")
 }
