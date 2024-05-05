@@ -36,8 +36,6 @@ nbdist
 ### VS Code ###
 **/.vscode
 
-**/.env
-
 # flyctl launch added from .idea/.gitignore
 # Default ignored files
 .idea/shelf
