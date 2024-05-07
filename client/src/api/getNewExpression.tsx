@@ -46,6 +46,6 @@ export const GetNewExpression = () => {
       }
     };
     fetchExpression();
-  }, []);
+  }, []); // Empty dependency array means this effect runs once on mount
   return expression;
 };
