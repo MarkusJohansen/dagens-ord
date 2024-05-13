@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../utils/config";
+import { config } from "../utils/config";
 import { useState, useEffect } from "react";
 import { Expression } from "../utils/types";
 
@@ -27,6 +27,9 @@ export const GetNewExpression = () => {
   const [expression, setExpression] = useState<ExpressionState>({
     isLoading: true,
   });
+
+  const API_URL = config.API_URL;
+
   useEffect(() => {
     const fetchExpression = async () => {
       try {
