@@ -28,12 +28,10 @@ export const GetNewExpression = () => {
     isLoading: true,
   });
 
-  const API_URL = config.API_URL;
-
   useEffect(() => {
     const fetchExpression = async () => {
       try {
-        const response = await axios.get(`${API_URL}/get`);
+        const response = await axios.get(`${config.API_URL}/get`);
         setExpression({
           expression: parseExpression(response.data),
           isLoading: false,
