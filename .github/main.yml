@@ -1,2 +1,22 @@
 - name: Renovate Bot GitHub Action
   uses: renovatebot/github-action@v40.1.10
+
+- name: build and load environment variables
+  on:
+    push:
+      branches:
+        - main
+
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: Install dependencies and build
+          run: |
+            npm ci
+            npm run build
+          env:
+            VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
