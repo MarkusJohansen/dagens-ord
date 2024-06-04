@@ -38,7 +38,10 @@ export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const colorUpdateTime = localStorage.getItem("colorUpdateTime");
-    if (!colorUpdateTime || Date.now() - Number(colorUpdateTime) > 1000) {
+    if (
+      !colorUpdateTime ||
+      Date.now() - Number(colorUpdateTime) > 24 * 60 * 60 * 1000
+    ) {
       updateColor();
     }
   }, []);
