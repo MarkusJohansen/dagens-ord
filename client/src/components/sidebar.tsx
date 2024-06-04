@@ -4,7 +4,7 @@ import { DisplaySidebarContext } from "../contexts/displaySidebarContext";
 import { ColorContext } from "../contexts/colorContext";
 
 export const Sidebar = () => {
-  const { displaySidebar, toggleSidebar } = useContext(DisplaySidebarContext);
+  const { displaySidebar } = useContext(DisplaySidebarContext);
   const { color } = useContext(ColorContext);
   return (
     <div
@@ -12,7 +12,6 @@ export const Sidebar = () => {
         !displaySidebar && "animate-slide-out block"
       }`}
     >
-      <button onClick={() => toggleSidebar()}>button</button>
       <div className="flex flex-col gap-20">
         <div>
           <h2 style={{ color: color }} className="font-logo">

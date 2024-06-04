@@ -1,4 +1,5 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
+import { ColorContext } from "./colorContext";
 
 type DisplaySidebarContextType = {
   displaySidebar: boolean;
@@ -17,6 +18,9 @@ export const DisplaySidebarProvider: React.FC<{
 
   const toggleSidebar = () => {
     setDisplaySidebar(!displaySidebar);
+    document
+      .getElementById("hamburger-button")!
+      .classList.toggle("toggle-button");
   };
 
   return (
