@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
-import { ColorContext } from "./colorContext";
+import React, { createContext, useState } from "react";
 
 type DisplaySidebarContextType = {
   displaySidebar: boolean;

@@ -3,6 +3,7 @@ import { ColorContext } from "../contexts/colorContext";
 
 export const SuggestionForm = () => {
   const { color } = useContext(ColorContext);
+  console.log(color);
 
   return (
     <form className="flex flex-col gap-2">
