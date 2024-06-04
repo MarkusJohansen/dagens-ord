@@ -39,11 +39,13 @@ export const SuggestionForm = () => {
           style={{ color: color, borderColor: color }}
         />
       </label>
-      <input
+      <button
         type="submit"
         style={{ backgroundColor: color }}
         className="text-dark-gray"
-      />
+      >
+        Send inn forslag
+      </button>
     </form>
   );
 };
