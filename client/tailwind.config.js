@@ -6,6 +6,7 @@ export default {
     extend: {
       colors: {
         "dark-gray": "#363636",
+        "semi-transparent": "rgba(0, 0, 0, 0.2)",
       },
       keyframes: {
         "slide-in": {

@@ -17,6 +17,9 @@ export const DisplaySidebarProvider: React.FC<{
 
   const toggleSidebar = () => {
     setDisplaySidebar(!displaySidebar);
+    document
+      .getElementById("hamburger-button")!
+      .classList.toggle("toggle-button");
   };
 
   return (

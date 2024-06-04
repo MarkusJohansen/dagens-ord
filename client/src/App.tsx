@@ -18,14 +18,18 @@ function App() {
       className={`h-screen`}
     >
       <DisplaySidebarProvider>
-        <header className="flex flex-col mx-40">
+        <header className="flex flex-col mx-20">
           <Navbar />
         </header>
         <Sidebar />
       </DisplaySidebarProvider>
-      <main className="flex flex-col mx-40">
+      <main className="flex flex-col mx-20">
         {isLoading || !expression ? (
-          <h1>Loading...</h1>
+          <Expression
+            word={"Et kult uttrykk laster inn..."}
+            example={`"Her kommer det et eksempel på bruk av utrykket"`}
+            explanation={"Og en forklaring på hva uttrykket betyr"}
+          />
         ) : (
           <Expression
             word={expression.expression}

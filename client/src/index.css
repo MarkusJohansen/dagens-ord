@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .toggle-button {
+    @apply [&>div::before]:translate-y-0 [&>div::before]:rotate-45 
+    [&>div::after]:translate-y-0 [&>div::after]:-rotate-45 
+    [&>div]:bg-transparent [&>div]:rotate-[180deg];
+  }
+}
