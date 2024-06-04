@@ -4,9 +4,7 @@ interface ExpressionProps {
   explanation: string;
 }
 
-const Expression = (props: ExpressionProps) => {
-  const { word, example, explanation } = props;
-
+const Expression = ({ word, example, explanation }: ExpressionProps) => {
   return (
     <div className="text-left">
       <h1 className="text-8xl font-bold mt-48">{word}</h1>
