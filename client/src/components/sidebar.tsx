@@ -8,7 +8,7 @@ export const Sidebar = () => {
   const { color } = useContext(ColorContext);
   return (
     <div
-      className={` z-0 h-screen w-full md:w-1/2 2xl:w-1/4 absolute top-0 px-12 bg-dark-gray origin-left animate-slide-in ${
+      className={` z-0 h-screen w-full md:w-1/2 2xl:w-1/4 absolute top-0 px-20 pt-10 bg-dark-gray origin-left animate-slide-in ${
         !displaySidebar && "animate-slide-out block"
       }`}
     >
