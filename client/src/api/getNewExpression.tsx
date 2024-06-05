@@ -32,10 +32,14 @@ export const GetNewExpression = () => {
     const fetchExpression = async () => {
       try {
         const response = await axios.get(`${config.API_URL}/get`);
-        setExpression({
-          expression: parseExpression(response.data),
-          isLoading: false,
-        });
+        if (response.data.lines[0]) {
+          setExpression({
+            expression: parseExpression(response.data),
+            isLoading: false,
+          });
+          return;
+        }
+        throw new Error("No expression data received");
       } catch (error) {
         setExpression({
           isLoading: false,

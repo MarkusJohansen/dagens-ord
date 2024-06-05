@@ -4,11 +4,14 @@ import App from "./App.tsx";
 import "./index.css";
 import "chimeracss/build/chimera-plain.css";
 import { ColorProvider } from "./contexts/colorContext.tsx";
+import { DisplaySidebarProvider } from "./contexts/displaySidebarContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ColorProvider>
-      <App />
-    </ColorProvider>
+    <DisplaySidebarProvider>
+      <ColorProvider>
+        <App />
+      </ColorProvider>
+    </DisplaySidebarProvider>
   </React.StrictMode>
 );
