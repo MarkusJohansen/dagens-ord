@@ -18,7 +18,7 @@ function About() {
       )}
       style={{ backgroundColor: color }}
     >
-      <div className="flex flex-col gap-10 w-1/2 backdrop-brightness-100 border-dark-gray border shadow-xl p-10 rounded-md">
+      <div className="flex flex-col gap-10 w-full lg:w-2/3 xl:w-1/2 backdrop-brightness-100 border-dark-gray lg:border lg:shadow-xl p-10 rounded-md">
         <div>
           <h1 className="font-logo text-4xl text-dark-gray">
             Send oss dine uttrykk!
