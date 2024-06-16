@@ -6,44 +6,40 @@ export const SuggestionForm = () => {
 
   return (
     <form className="flex flex-col gap-2">
-      <label htmlFor="word" style={{ color: color }}>
+      <label htmlFor="word" className="text-dark-gray">
         Ord eller uttrykk:
         <input
           type="text"
           id="word"
           name="word"
           placeholder="En vinge"
-          className={`bg-dark-gray`}
-          style={{ color: color, borderColor: color }}
+          className={`border-dark-gray placeholder:text-dark-gray`}
+          style={{ background: color }}
         />
       </label>
-      <label htmlFor="example" style={{ color: color }}>
+      <label htmlFor="example" className="text-dark-gray">
         Eksempel:
         <input
           type="text"
           id="word"
           name="word"
           placeholder="Skal du ha deg en vinge eller?"
-          className={`bg-dark-gray`}
-          style={{ color: color, borderColor: color }}
+          className={`border-dark-gray placeholder:text-dark-gray`}
+          style={{ background: color }}
         />
       </label>
-      <label htmlFor="explanation" style={{ color: color }}>
+      <label htmlFor="explanation" className="text-dark-gray">
         Forklaring:
         <input
           type="text"
           id="word"
           name="word"
           placeholder="Et hardt slag"
-          className={`bg-dark-gray`}
-          style={{ color: color, borderColor: color }}
+          className={`border-dark-gray placeholder:text-dark-gray`}
+          style={{ background: color }}
         />
       </label>
-      <button
-        type="submit"
-        style={{ backgroundColor: color }}
-        className="text-dark-gray"
-      >
+      <button type="submit" className="bg-dark-gray" style={{ color: color }}>
         Send inn forslag
       </button>
     </form>

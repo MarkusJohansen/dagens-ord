@@ -1,20 +1,27 @@
-import logo from "../img/logo.png";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useContext } from "react";
-import { DisplaySidebarContext } from "../contexts/displaySidebarContext";
-import { HamburgerButton } from "./hamburger-button";
+import { ColorContext } from "../contexts/colorContext";
+import Logo from "./logo";
 
 const Navbar = () => {
-  const { toggleSidebar } = useContext(DisplaySidebarContext);
+  const { color } = useContext(ColorContext);
+  const navigate = useNavigate({ from: "/" });
   return (
-    <nav className="flex flex-row w-full justify-between py-4">
-      <HamburgerButton onClick={toggleSidebar} />
-      <div className="text-black hover:text-black ml-auto flex flex-row items-center font-logo">
-        <div className="h-full flex text-2xl font-bold">Dagens</div>
-        <div className="mx-2">
-          <img src={logo} alt="logo" className="w-12" />
+    <>
+      <nav style={{ backgroundColor: color }}>
+        <div className="page-padding py-2 flex flex-row w-full justify-between items-center">
+          <Logo />
+          <button
+            onClick={() => navigate({ to: "/contribute" })}
+            className="border-2 text-dark-gray"
+            style={{ color: color }}
+          >
+            Bidra
+          </button>
         </div>
-      </div>
-    </nav>
+        <hr className="w-screen bg-dark-gray m-0" />
+      </nav>
+    </>
   );
 };
 

@@ -1,11 +1,14 @@
+import { createLazyFileRoute } from "@tanstack/react-router";
 import { useContext } from "react";
-import { GetNewExpression } from "./api/getNewExpression";
-import Expression from "./components/expression";
-import Navbar from "./components/navbar";
-import { Sidebar } from "./components/sidebar";
-import { ColorContext } from "./contexts/colorContext";
+import { GetNewExpression } from "../api/getNewExpression";
+import Expression from "../components/expression";
+import { ColorContext } from "../contexts/colorContext";
 
-function App() {
+export const Route = createLazyFileRoute("/")({
+  component: Index,
+});
+
+function Index() {
   const { color } = useContext(ColorContext);
   const { expression, isLoading } = GetNewExpression();
 
@@ -14,11 +17,9 @@ function App() {
       style={{
         backgroundColor: color,
       }}
-      className="min-h-screen flex flex-col"
+      className=" min-h-screen flex flex-col"
     >
-      <Sidebar />
-      <div className="px-10 md:px-20 lg:px-40 flex-grow flex flex-col">
-        <Navbar />
+      <div className="page-padding flex-grow flex flex-col">
         <main className="flex-grow flex flex-col items-center justify-center ">
           {isLoading || !expression ? (
             <Expression
@@ -38,5 +39,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
