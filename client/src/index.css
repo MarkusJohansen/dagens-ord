@@ -8,4 +8,7 @@
     [&>div::after]:translate-y-0 [&>div::after]:-rotate-45 
     [&>div]:bg-transparent [&>div]:rotate-[180deg];
   }
+  .page-padding {
+    @apply px-5 md:px-10 lg:px-32;
+  }
 }

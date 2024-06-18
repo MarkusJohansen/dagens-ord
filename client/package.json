@@ -11,6 +11,9 @@
     "build:css": "postcss src/index.css -o dist/index.css"
   },
   "dependencies": {
+    "@tanstack/react-router": "^1.38.1",
+    "@tanstack/router-devtools": "^1.38.1",
+    "@tanstack/router-vite-plugin": "^1.38.0",
     "axios": "^1.6.7",
     "chimeracss": "^1.4.4",
     "clsx": "^2.1.1",
