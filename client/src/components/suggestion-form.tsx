@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ColorContext } from "../contexts/colorContext";
+import { ColorContext } from "@/color-context";
 
 export const SuggestionForm = () => {
   const { color } = useContext(ColorContext);
