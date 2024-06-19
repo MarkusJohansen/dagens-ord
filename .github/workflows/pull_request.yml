@@ -6,12 +6,6 @@ on:
       - main
 
 jobs:
-  renovate:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Renovate Bot GitHub Action
-        uses: renovatebot/github-action@v40.1.10
-
   build:
     runs-on: ubuntu-latest
     steps:
