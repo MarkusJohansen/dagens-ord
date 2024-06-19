@@ -6,21 +6,17 @@ on:
       - main
 
 jobs:
-  renovate:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Renovate Bot GitHub Action
-        uses: renovatebot/github-action@v40.1.10
-
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: oven-sh/setup-bun@v1
 
       - name: Install dependencies and build
         run: |
-          npm ci
-          npm run build
+          cd client
+          bun install
+          bun build:src
         env:
           VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
           VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
