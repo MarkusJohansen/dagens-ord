@@ -1,8 +1,8 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useContext } from "react";
-import { GetNewExpression } from "../api/getNewExpression";
-import Expression from "../components/expression";
-import { ColorContext } from "../contexts/colorContext";
+import { Expression } from "@/components/expression";
+import { useGetNewExpression } from "@/hooks/useGetNewExpression";
+import { ColorContext } from "@/color-context";
 
 export const Route = createLazyFileRoute("/")({
   component: Index,
@@ -10,7 +10,7 @@ export const Route = createLazyFileRoute("/")({
 
 function Index() {
   const { color } = useContext(ColorContext);
-  const { expression, isLoading } = GetNewExpression();
+  const { expression, isLoading } = useGetNewExpression();
 
   return (
     <div

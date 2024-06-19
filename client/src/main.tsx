@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./style.css";
 import "chimeracss/build/chimera-plain.css";
-import { ColorProvider } from "./contexts/colorContext.tsx";
+import { ColorProvider } from "@/color-context";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";

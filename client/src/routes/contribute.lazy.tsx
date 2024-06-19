@@ -1,7 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import clsx from "clsx";
 import { useContext } from "react";
-import { ColorContext } from "../contexts/colorContext";
+import { ColorContext } from "../color-context";
 import { SuggestionForm } from "../components/suggestion-form";
 
 export const Route = createLazyFileRoute("/contribute")({

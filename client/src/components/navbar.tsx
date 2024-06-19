@@ -1,7 +1,7 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useContext } from "react";
-import { ColorContext } from "../contexts/colorContext";
-import Logo from "./logo";
+import { ColorContext } from "@/color-context";
+import Logo from "@/components/logo";
 
 const Navbar = () => {
   const { color } = useContext(ColorContext);
