@@ -3,9 +3,11 @@ import logo from "@/img/logo.png";
 
 const Logo = () => {
   return (
-    <Link className="mr-auto flex flex-row items-center font-logo" to="/">
-      <h2 className="h-full text-black flex text-2xl font-bold">Dagens</h2>
-      <div className="mx-2">
+    <Link className="mr-auto flex" to="/">
+      <h2 className="h-full text-black text-2xl font-bold font-logo my-auto">
+        Dagens
+      </h2>
+      <div className="mx-2 my-auto h-full">
         <img src={logo} alt="logo" className="w-12" />
       </div>
     </Link>
