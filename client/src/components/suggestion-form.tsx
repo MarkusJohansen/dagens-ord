@@ -1,8 +1,18 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ColorContext } from "@/color-context";
+import { useSuggest } from "@/hooks/useSuggestExpression";
 
 export const SuggestionForm = () => {
   const { color } = useContext(ColorContext);
+  const [word, setWord] = useState("");
+  const [example, setExample] = useState("");
+  const [explanation, setExplanation] = useState("");
+  const { suggest } = useSuggest({
+    id: 0,
+    expression: word,
+    example,
+    definition: explanation,
+  });
 
   return (
     <form className="flex flex-col gap-2">
@@ -10,9 +20,10 @@ export const SuggestionForm = () => {
         Ord eller uttrykk:
         <input
           type="text"
-          id="word"
-          name="word"
+          name="expression"
           placeholder="En vinge"
+          value={word}
+          onChange={(e) => setWord(e.target.value)}
           className={`border-dark-gray placeholder:text-dark-gray`}
           style={{ background: color }}
         />
@@ -21,9 +32,10 @@ export const SuggestionForm = () => {
         Eksempel:
         <input
           type="text"
-          id="word"
-          name="word"
+          name="example"
           placeholder="Skal du ha deg en vinge eller?"
+          value={example}
+          onChange={(e) => setExample(e.target.value)}
           className={`border-dark-gray placeholder:text-dark-gray`}
           style={{ background: color }}
         />
@@ -32,14 +44,20 @@ export const SuggestionForm = () => {
         Forklaring:
         <input
           type="text"
-          id="word"
-          name="word"
+          name="definition"
           placeholder="Et hardt slag"
+          value={explanation}
+          onChange={(e) => setExplanation(e.target.value)}
           className={`border-dark-gray placeholder:text-dark-gray`}
           style={{ background: color }}
         />
       </label>
-      <button type="submit" className="bg-dark-gray" style={{ color: color }}>
+      <button
+        type="submit"
+        className="bg-dark-gray"
+        style={{ color: color }}
+        onClick={suggest}
+      >
         Send inn forslag
       </button>
     </form>

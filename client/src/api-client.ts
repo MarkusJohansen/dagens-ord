@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { Expression } from "./types";
 
 export const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -7,5 +8,17 @@ export const supabase = createClient(
 
 export const fetchAllExpressions = async () => {
   const { data, error } = await supabase.from("expressions").select("*");
+  return { data, error };
+};
+
+export const suggestNewExpression = async (expression: Expression) => {
+  const { data, error } = await supabase
+    .from("suggestions")
+    .insert({ expression });
+  return { data, error };
+};
+
+export const fetchSuggestionRowCount = async () => {
+  const { data, error } = await supabase.from("suggestions").select("id");
   return { data, error };
 };
