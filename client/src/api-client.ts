@@ -12,10 +12,8 @@ export const fetchAllExpressions = async () => {
 };
 
 export const suggestNewExpression = async (expression: Expression) => {
-  const { data, error } = await supabase
-    .from("suggestions")
-    .insert({ expression });
-  return { data, error };
+  const { error } = await supabase.from("suggestions").insert({ expression });
+  return { error };
 };
 
 export const fetchSuggestionRowCount = async () => {

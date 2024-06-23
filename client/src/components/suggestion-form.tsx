@@ -24,7 +24,7 @@ export const SuggestionForm = () => {
           placeholder="En vinge"
           value={word}
           onChange={(e) => setWord(e.target.value)}
-          className={`border-dark-gray placeholder:text-dark-gray`}
+          className={`border-dark-gray text-dark-gray placeholder:text-light-gray`}
           style={{ background: color }}
         />
       </label>
@@ -36,7 +36,7 @@ export const SuggestionForm = () => {
           placeholder="Skal du ha deg en vinge eller?"
           value={example}
           onChange={(e) => setExample(e.target.value)}
-          className={`border-dark-gray placeholder:text-dark-gray`}
+          className={`border-dark-gray text-dark-gray placeholder:text-light-gray`}
           style={{ background: color }}
         />
       </label>
@@ -48,14 +48,19 @@ export const SuggestionForm = () => {
           placeholder="Et hardt slag"
           value={explanation}
           onChange={(e) => setExplanation(e.target.value)}
-          className={`border-dark-gray placeholder:text-dark-gray`}
+          className={`border-dark-gray text-dark-gray placeholder:text-light-gray`}
           style={{ background: color }}
         />
       </label>
       <button
         className="bg-dark-gray"
         style={{ color: color }}
-        onClick={suggest}
+        onClick={() => {
+          suggest();
+          setWord("");
+          setExample("");
+          setExplanation("");
+        }}
       >
         Send inn forslag
       </button>
