@@ -15,7 +15,7 @@ export const SuggestionForm = () => {
   });
 
   return (
-    <form className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2">
       <label htmlFor="word" className="text-dark-gray">
         Ord eller uttrykk:
         <input
@@ -53,13 +53,12 @@ export const SuggestionForm = () => {
         />
       </label>
       <button
-        type="submit"
         className="bg-dark-gray"
         style={{ color: color }}
         onClick={suggest}
       >
         Send inn forslag
       </button>
-    </form>
+    </div>
   );
 };
