@@ -1,6 +1,6 @@
 # App Building phase --------
 # OpenJDK 11 is currently most stable
-FROM openjdk:11 AS build
+FROM openjdk:21 AS build
 LABEL authors="henrikmoewaehre"
 
 RUN mkdir /server
