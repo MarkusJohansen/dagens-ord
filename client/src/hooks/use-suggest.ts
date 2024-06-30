@@ -3,12 +3,17 @@ import { Expression } from "@/types";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export const useSuggest = (props: Expression) => {
+export const useSuggest = (expression: Expression) => {
   const [isSubmitting, setIsSubmitting] = useState(true);
 
   const suggest = async () => {
-    if (props && props.expression && props.example && props.definition) {
-      const { error } = await suggestNewExpression(props);
+    if (
+      expression &&
+      expression.expression &&
+      expression.example &&
+      expression.definition
+    ) {
+      const { error } = await suggestNewExpression(expression);
       if (error) {
         setIsSubmitting(false);
         toast.error("Oi, noe gikk galt!");

@@ -1,7 +1,7 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { useContext } from "react";
 import { Expression } from "@/components/expression";
-import { useGetNewExpression } from "@/hooks/useGetNewExpression";
+import { useGetNewExpression } from "@/hooks/use-get-random-expression";
 import { ColorContext } from "@/color-context";
 
 export const Route = createLazyFileRoute("/")({

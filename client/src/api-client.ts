@@ -12,7 +12,11 @@ export const fetchAllExpressions = async () => {
 };
 
 export const suggestNewExpression = async (expression: Expression) => {
-  const { error } = await supabase.from("suggestions").insert({ expression });
+  const { error } = await supabase.from("suggestions").insert({
+    expression: expression.expression,
+    example: expression.example,
+    definition: expression.definition,
+  });
   return { error };
 };
 
