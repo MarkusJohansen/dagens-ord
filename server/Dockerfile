@@ -1,6 +1,6 @@
 # App Building phase --------
 # OpenJDK 11 is currently most stable
-FROM openjdk:11 AS build
+FROM openjdk:11.0.16 AS build
 LABEL authors="henrikmoewaehre"
 
 RUN mkdir /server
@@ -14,7 +14,7 @@ COPY . .
 RUN ./gradlew clean build
 
 # Container setup --------
-FROM openjdk:11-jre AS create-container
+FROM openjdk:11.0.16-jre AS create-container
 
 # Set the working directory in the container
 WORKDIR /server
