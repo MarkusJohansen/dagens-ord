@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { ColorContext } from "@/color-context";
-import { useSuggest } from "@/hooks/useSuggestExpression";
+import { useSuggest } from "@/hooks/use-suggest";
 
 export const SuggestionForm = () => {
   const { color } = useContext(ColorContext);
