@@ -15,8 +15,6 @@ Liste over teknologier:
 - TailwindCSS
 - [ChimeraCSS](https://github.com/ChimeraCSS/ChimeraCSS)
 - Axios
-- Kotlin
-- Ktor
 - Kotlin Supabase SDK
 - Gradle
 - Bun
