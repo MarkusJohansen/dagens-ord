@@ -11,6 +11,11 @@ export const fetchAllExpressions = async () => {
   return { data, error };
 };
 
+export const fetchExpression = async () => {
+  const { data, error } = await supabase.from("random_expression").select("*").limit(1);
+  return { data, error };
+};
+
 export const suggestNewExpression = async (expression: Expression) => {
   const { error } = await supabase.from("suggestions").insert({
     expression: expression.expression,

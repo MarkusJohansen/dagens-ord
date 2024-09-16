@@ -1,4 +1,4 @@
-import { fetchAllExpressions } from "@/api-client";
+import { fetchExpression } from "@/api-client";
 import { Expression } from "@/types";
 import { useEffect, useState } from "react";
 
@@ -19,14 +19,13 @@ export const useGetNewExpression = () => {
       } else {
         // Fetch a new expression and update storage
         setIsLoading(true);
-        const { data, error } = await fetchAllExpressions();
+        const { data, error } = await fetchExpression();
         if (error) {
           console.error("Error fetching new expression", error);
           setIsLoading(false);
         }
         if (data) {
-          const randomIndex = Math.floor(Math.random() * data.length);
-          const randomExpression = data[randomIndex];
+          const randomExpression = data[0];
           setExpression(randomExpression);
           localStorage.setItem("lastFetchDate", today);
           localStorage.setItem(
