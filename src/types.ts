@@ -3,4 +3,5 @@ export type Expression = {
   expression: string;
   example: string;
   definition: string;
+  nsfw: boolean;
 };
