@@ -12,7 +12,11 @@ export const fetchAllExpressions = async () => {
 };
 
 export const fetchExpression = async () => {
-  const { data, error } = await supabase.from("random_expression").select("*").limit(1);
+  const { data, error } = await supabase
+  .from("random_expression")
+  .select("*")
+  .eq("nsfw", false)
+  .limit(1); 
   return { data, error };
 };
 
