@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { Expression } from "./types";
+import { SuggestExpression } from "./types";
 
 export const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -20,7 +20,7 @@ export const fetchExpression = async () => {
   return { data, error };
 };
 
-export const suggestNewExpression = async (expression: Expression) => {
+export const suggestNewExpression = async (expression: SuggestExpression) => {
   const { error } = await supabase.from("suggestions").insert({
     expression: expression.expression,
     example: expression.example,
