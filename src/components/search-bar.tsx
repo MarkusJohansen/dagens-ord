@@ -16,8 +16,8 @@ const SearchBar = (props: SearchBarProps) => {
   // Reset query when the URL changes
   useEffect(() => {
     if (!router.state.location.pathname.includes("search"))
-      setQuery(""); // Clear the query when the route changes
-  }, [router.state.location.pathname]); // Monitor the pathname for changes
+      setQuery("");
+  }, [router.state.location.pathname]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") handleSearch();

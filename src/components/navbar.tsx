@@ -9,7 +9,7 @@ const Navbar = () => {
   const { color } = useContext(ColorContext);
   const navigate = useNavigate({ from: "/" });
   const [query, setQuery] = useState<string>("");
-  const { search } = useSearchContext(); // Access the search function from context
+  const { search } = useSearchContext();
 
   const handleSearch = () => {
     search(query);

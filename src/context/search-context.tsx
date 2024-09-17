@@ -38,7 +38,7 @@ export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     setIsLoading(false);
 
     if (data) {
-      setResults(data); // Store the results in the state
+      setResults(data);
     } else if (error) {
       toast.error(error.details);
     }
