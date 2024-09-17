@@ -7,6 +7,7 @@ import { ColorProvider } from "@/color-context";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { SearchProvider } from "./context/search-context";
 
 // Create a new router instance
 const router = createRouter({ routeTree });
@@ -23,9 +24,11 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <ColorProvider>
-        <RouterProvider router={router} />
-      </ColorProvider>
+      <SearchProvider>
+        <ColorProvider>
+          <RouterProvider router={router} />
+        </ColorProvider>
+      </SearchProvider>
     </StrictMode>
   );
 }

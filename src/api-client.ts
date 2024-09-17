@@ -24,3 +24,11 @@ export const fetchSuggestionRowCount = async () => {
   const { data, error } = await supabase.from("suggestions").select("id");
   return { data, error };
 };
+
+export const searchExpression = async (query: string) => {
+  const { data, error } = await supabase
+    .from("expressions")
+    .select()
+    .ilike("expression", `%${query}%`); // Case-insensitive partial match
+  return { data, error };
+};
