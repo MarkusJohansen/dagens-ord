@@ -1,9 +1,9 @@
 import { suggestNewExpression } from "@/api-client";
-import { Expression } from "@/types";
+import { SuggestExpression } from "@/types";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export const useSuggest = (expression: Expression) => {
+export const useSuggest = (expression: SuggestExpression) => {
   const [isSubmitting, setIsSubmitting] = useState(true);
 
   const suggest = async () => {
