@@ -16,10 +16,16 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
+const SearchLazyImport = createFileRoute('/search')()
 const ContributeLazyImport = createFileRoute('/contribute')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
+
+const SearchLazyRoute = SearchLazyImport.update({
+  path: '/search',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/search.lazy').then((d) => d.Route))
 
 const ContributeLazyRoute = ContributeLazyImport.update({
   path: '/contribute',
@@ -49,6 +55,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContributeLazyImport
       parentRoute: typeof rootRoute
     }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchLazyImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -57,6 +70,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexLazyRoute,
   ContributeLazyRoute,
+  SearchLazyRoute,
 })
 
 /* prettier-ignore-end */
@@ -68,7 +82,8 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/contribute"
+        "/contribute",
+        "/search"
       ]
     },
     "/": {
@@ -76,6 +91,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/contribute": {
       "filePath": "contribute.lazy.tsx"
+    },
+    "/search": {
+      "filePath": "search.lazy.tsx"
     }
   }
 }
