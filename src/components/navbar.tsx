@@ -23,14 +23,14 @@ const Navbar = () => {
         <div className="page-padding py-2 flex flex-row w-full justify-between items-center">
           <Logo />
           <div className="flex items-center gap-4">
+            <Navlink to="/about" label="Om Prosjektet" />
+            <Navlink to="/contribute" label="Bidra" />
             <SearchBar
               query={query}
               setQuery={setQuery}
               handleSearch={handleSearch}
               color={color}
             />
-            <Navlink to="/about" label="Om Prosjektet" />
-            <Navlink to="/contribute" label="Bidra" />
           </div>
         </div>
         <hr className="w-screen bg-dark-gray m-0" />
