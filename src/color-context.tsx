@@ -12,7 +12,6 @@ export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const colors = [
-    "#ffffff", // white
     "#fecaca", // red-200
     "#fed7aa", // orange-200
     "#f6bd60", // mustard
