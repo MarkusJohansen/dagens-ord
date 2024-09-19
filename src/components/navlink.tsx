@@ -7,7 +7,10 @@ interface NavlinkProps {
 
 export const Navlink: React.FC<NavlinkProps> = ({ to, label }) => {
   return (
-    <Link to={to} className="text-dark-gray hover:underline font-logo">
+    <Link
+      to={to}
+      className="text-lg font-semibold text-dark-gray hover:underline font-logo"
+    >
       {label}
     </Link>
   );

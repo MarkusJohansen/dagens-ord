@@ -11,7 +11,7 @@ function About() {
   const { color } = useContext(ColorContext);
   return (
     <div
-      className="page-padding min-h-screen w-screen flex justify-center"
+      className="page-padding min-h-screen w-screen flex items-center justify-center"
       style={{ backgroundColor: color }}
     >
       <div className="flex flex-col gap-6">
@@ -32,8 +32,11 @@ function About() {
           stolt vist fram det lille prosjektet vårt, skjønte vi at vi at det er
           flere der ute som har en forkjærlighet for det norske språket. Derfor
           har vi lagt til rette for at du kan
-          <Link to="/contribute"> bidra med dine egne utrykk</Link>. Vi gleder
-          oss til å se hva dere har å by på!
+          <Link className="text-dark-gray underline" to="/contribute">
+            {" "}
+            bidra med dine egne utrykk
+          </Link>
+          . Vi gleder oss til å se hva dere har å by på!
         </p>
         <p>
           Hvis du har lyst til å bidra til prosjektet på en annen måte, kan du
