@@ -15,7 +15,7 @@ function About() {
       style={{ backgroundColor: color }}
     >
       <div className="flex flex-col gap-6">
-        <h1 className="font-logo">Om Prosjektet</h1>
+        <h1 className="font-logo">Om prosjektet</h1>
         <p>
           Det var en kald vår. Året var 2024 og to informatikk studenter med en
           sær humor basert på spesielle ordtak, utrykk og ord, får en visjon..
@@ -32,7 +32,10 @@ function About() {
           stolt vist fram det lille prosjektet vårt, skjønte vi at vi at det er
           flere der ute som har en forkjærlighet for det norske språket. Derfor
           har vi lagt til rette for at du kan
-          <Link className="text-dark-gray underline" to="/contribute">
+          <Link
+            className=" text-dark-gray underline  hover:text-gray-500 active:text-gray-600 focus:text-dark-gray"
+            to="/contribute"
+          >
             {" "}
             bidra med dine egne utrykk
           </Link>
