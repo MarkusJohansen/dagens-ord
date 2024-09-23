@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useContext, useState } from "react";
 import { ColorContext } from "@/color-context";
 import Logo from "@/components/logo";
@@ -30,12 +30,12 @@ const Navbar = () => {
               <Navlink to="/contribute" label="Bidra" />
             </div>
           </div>
-          <SearchBar
+            <SearchBar
             query={query}
             setQuery={setQuery}
             handleSearch={handleSearch}
             color={color}
-          />
+            />
         </div>
         <hr className="w-screen bg-dark-gray m-0" />
       </nav>
