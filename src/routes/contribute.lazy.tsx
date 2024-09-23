@@ -5,10 +5,10 @@ import { ColorContext } from "@/color-context";
 import { SuggestionForm } from "@/components/suggestion-form";
 
 export const Route = createLazyFileRoute("/contribute")({
-  component: About,
+  component: Contribute,
 });
 
-function About() {
+function Contribute() {
   const { color } = useContext(ColorContext);
   return (
     <div

@@ -2,7 +2,7 @@
 
 Hobby-prosjekt for to ordsmeder som syntes ord og utrykk er gøy 🤝
 
-Dagens ord er en nettside som serverer deg et nytt morsomt ord eller utrykk hver dag 🤘 Dette kan være alt ifra morsomme dialekt ord til uttrykk født i popkulturen 😀
+Dagens Ord er en nettside som serverer deg et nytt morsomt ord eller utrykk hver dag 🤘 Dette kan være alt ifra morsomme dialekt ord til uttrykk født i popkulturen 😀
 
 ## Teknologi 🧑‍💻
 

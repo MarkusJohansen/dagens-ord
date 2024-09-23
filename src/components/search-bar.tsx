@@ -15,8 +15,7 @@ const SearchBar = (props: SearchBarProps) => {
 
   // Reset query when the URL changes
   useEffect(() => {
-    if (!router.state.location.pathname.includes("search"))
-      setQuery("");
+    if (!router.state.location.pathname.includes("search")) setQuery("");
   }, [router.state.location.pathname]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -24,19 +23,20 @@ const SearchBar = (props: SearchBarProps) => {
   };
 
   return (
-    <div className="flex border-none rounded-xl bg-white mr-2">
+    <div className="flex gap-1 flex-row hidden md:block">
       <input
         value={query}
+        placeholder="Søk..."
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="border-none m-0 focus:shadow-none"
+        className="border-none m-0 focus:shadow-none h-10"
       />
       <button
         onClick={handleSearch}
-        className="focus:shadow-none bg-transparent hover:bg-neutral-100"
+        className="focus:shadow-none bg-dark-gray hover:bg-gray-600 h-10"
         style={{ color: color }}
       >
-        <FaSearch color="black" />
+        <FaSearch color="white" />
       </button>
     </div>
   );
