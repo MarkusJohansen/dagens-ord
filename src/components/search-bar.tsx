@@ -23,7 +23,7 @@ const SearchBar = (props: SearchBarProps) => {
   };
 
   return (
-    <div className="flex gap-1 flex-row hidden md:block">
+    <div className="gap-1 flex-row hidden md:flex">
       <input
         value={query}
         placeholder="Søk..."
