@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { ColorContext } from "@/color-context";
 import { SearchResults } from "@/components/search-results";
 
-export const Route = createLazyFileRoute("/search")({
+export const Route = createLazyFileRoute("/sok")({
   component: Index,
 });
 
