@@ -15,7 +15,7 @@ export const SearchResults = () => {
               <p className="text-xl font-semibold ">{result.expression}</p>
               <p className="italic">{result.definition}</p>
             </div>
-            <hr className="m-0 h-0.5 bg-dark-gray opacity-10" />
+            <hr className="m-0 h-0.5 opacity-10" />
           </div>
         ))}
       </div>

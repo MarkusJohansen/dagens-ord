@@ -5,7 +5,6 @@ export default {
     fontFamily: { logo: ["Playfair Display"] },
     extend: {
       colors: {
-        "dark-gray": "#363636",
         "light-gray": "#656565",
         "semi-transparent": "rgba(0, 0, 0, 0.2)",
       },

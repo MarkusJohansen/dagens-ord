@@ -33,7 +33,7 @@ const SearchBar = (props: SearchBarProps) => {
       />
       <button
         onClick={handleSearch}
-        className="focus:shadow-none bg-dark-gray hover:bg-gray-600 h-10"
+        className="focus:shadow-none hover:bg-gray-600 h-10"
         style={{ color: color }}
       >
         <FaSearch color="white" />

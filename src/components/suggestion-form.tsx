@@ -16,7 +16,7 @@ export const SuggestionForm = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor="word" className="text-dark-gray">
+      <label htmlFor="word">
         Ord eller uttrykk:
         <input
           type="text"
@@ -24,11 +24,11 @@ export const SuggestionForm = () => {
           placeholder="En vinge"
           value={word}
           onChange={(e) => setWord(e.target.value)}
-          className={`border-dark-gray text-dark-gray placeholder:text-light-gray`}
+          className="placeholder:text-light-gray border-black"
           style={{ background: color }}
         />
       </label>
-      <label htmlFor="example" className="text-dark-gray">
+      <label htmlFor="example" className="">
         Eksempel:
         <input
           type="text"
@@ -36,11 +36,11 @@ export const SuggestionForm = () => {
           placeholder="Skal du ha deg en vinge eller?"
           value={example}
           onChange={(e) => setExample(e.target.value)}
-          className={`border-dark-gray text-dark-gray placeholder:text-light-gray`}
+          className="placeholder:text-light-gray border-black"
           style={{ background: color }}
         />
       </label>
-      <label htmlFor="explanation" className="text-dark-gray">
+      <label htmlFor="explanation" className="">
         Forklaring:
         <input
           type="text"
@@ -48,20 +48,11 @@ export const SuggestionForm = () => {
           placeholder="Et hardt slag"
           value={explanation}
           onChange={(e) => setExplanation(e.target.value)}
-          className={`border-dark-gray text-dark-gray placeholder:text-light-gray`}
+          className="placeholder:text-light-gray border-black"
           style={{ background: color }}
         />
       </label>
-      <button
-        className="bg-dark-gray"
-        style={{ color: color }}
-        onClick={() => {
-          suggest();
-          setWord("");
-          setExample("");
-          setExplanation("");
-        }}
-      >
+      <button style={{ color: color }} onClick={() => suggest()}>
         Send inn forslag
       </button>
     </div>
