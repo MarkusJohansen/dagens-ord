@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const handleSearch = () => {
     search(query);
-    navigate({ to: "/search" });
+    navigate({ to: "/sok" });
   };
 
   return (
@@ -26,8 +26,8 @@ const Navbar = () => {
               <Logo />
             </div>
             <div className="flex gap-6">
-              <Navlink to="/about" label="Om prosjektet" />
-              <Navlink to="/contribute" label="Bidra" />
+              <Navlink to="/om-prosjektet" label="Om prosjektet" />
+              <Navlink to="/bidra" label="Bidra" />
             </div>
           </div>
             <SearchBar

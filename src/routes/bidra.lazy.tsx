@@ -1,20 +1,20 @@
-import { createLazyFileRoute } from "@tanstack/react-router";
-import clsx from "clsx";
-import { useContext } from "react";
-import { ColorContext } from "@/color-context";
-import { SuggestionForm } from "@/components/suggestion-form";
+import { createLazyFileRoute } from '@tanstack/react-router'
+import clsx from 'clsx'
+import { useContext } from 'react'
+import { ColorContext } from '@/color-context'
+import { SuggestionForm } from '@/components/suggestion-form'
 
-export const Route = createLazyFileRoute("/contribute")({
+export const Route = createLazyFileRoute('/bidra')({
   component: Contribute,
-});
+})
 
 function Contribute() {
-  const { color } = useContext(ColorContext);
+  const { color } = useContext(ColorContext)
   return (
     <div
       className={clsx(
-        "page-padding min-h-screen w-screen",
-        "flex flex-col items-center justify-center"
+        'page-padding min-h-screen w-screen',
+        'flex flex-col items-center justify-center',
       )}
       style={{ backgroundColor: color }}
     >
@@ -34,5 +34,5 @@ function Contribute() {
         <SuggestionForm />
       </div>
     </div>
-  );
+  )
 }
