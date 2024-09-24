@@ -22,7 +22,7 @@ const Navbar = () => {
       <nav style={{ backgroundColor: color }}>
         <div className="page-padding py-2 flex flex-row w-full justify-between items-center">
           <div className="flex items-center gap-14">
-            <div className="hidden md:block">
+            <div>
               <Logo />
             </div>
             <div className="flex gap-6">
