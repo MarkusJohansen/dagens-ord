@@ -30,14 +30,14 @@ const Navbar = () => {
               <Navlink to="/bidra" label="Bidra" />
             </div>
           </div>
-            <SearchBar
+          <SearchBar
             query={query}
             setQuery={setQuery}
             handleSearch={handleSearch}
             color={color}
-            />
+          />
         </div>
-        <hr className="w-screen bg-dark-gray m-0" />
+        <hr className="w-screen m-0" />
       </nav>
     </>
   );

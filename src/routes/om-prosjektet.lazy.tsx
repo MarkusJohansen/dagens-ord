@@ -1,14 +1,14 @@
-import { ColorContext } from '@/color-context'
-import { ExpressionCount } from '@/components/expression-counter'
-import { createLazyFileRoute, Link } from '@tanstack/react-router'
-import { useContext } from 'react'
+import { ColorContext } from "@/color-context";
+import { ExpressionCount } from "@/components/expression-counter";
+import { createLazyFileRoute, Link } from "@tanstack/react-router";
+import { useContext } from "react";
 
-export const Route = createLazyFileRoute('/om-prosjektet')({
+export const Route = createLazyFileRoute("/om-prosjektet")({
   component: About,
-})
+});
 
 function About() {
-  const { color } = useContext(ColorContext)
+  const { color } = useContext(ColorContext);
   return (
     <div
       className="page-padding min-h-screen w-screen flex items-center justify-center"
@@ -33,10 +33,10 @@ function About() {
           flere der ute som har en forkjærlighet for det norske språket. Derfor
           har vi lagt til rette for at du kan
           <Link
-            className=" text-dark-gray underline  hover:text-gray-500 active:text-gray-600 focus:text-dark-gray"
+            className="underline  text-black hover:text-gray-500 active:text-gray-600 "
             to="/bidra"
           >
-            {' '}
+            {" "}
             bidra med dine egne utrykk
           </Link>
           . Vi gleder oss til å se hva dere har å by på!
@@ -54,5 +54,5 @@ function About() {
         </div>
       </div>
     </div>
-  )
+  );
 }
