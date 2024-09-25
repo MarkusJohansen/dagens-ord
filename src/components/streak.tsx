@@ -22,9 +22,9 @@ const Streak = () => {
   }, [])
 
   if (streak > 0) return (
-    <div className="flex mr-6 items-center">
+    <div className="flex mr-8 items-center">
       <FaFire size={22}/>
-      <p className="decoration-8">
+      <p className="text-2xl font-semibold ml-1 font-logo">
         {streak}
       </p>
     </div>
