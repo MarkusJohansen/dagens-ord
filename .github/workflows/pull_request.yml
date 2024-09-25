@@ -14,5 +14,6 @@ jobs:
 
       - name: Install dependencies and build
         run: |
+          cd user-app
           bun install
           bun build:src
