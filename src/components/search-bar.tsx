@@ -29,14 +29,14 @@ const SearchBar = (props: SearchBarProps) => {
         placeholder="Søk..."
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="border-none m-0 focus:shadow-none h-10"
+        className="m-0 focus:shadow-none h-10 bg-transparent border-black border-2 placeholder:text-light-gray"
       />
       <button
         onClick={handleSearch}
         className="focus:shadow-none hover:bg-gray-600 h-10"
         style={{ color: color }}
       >
-        <FaSearch color="white" />
+        <FaSearch color={color} />
       </button>
     </div>
   );
