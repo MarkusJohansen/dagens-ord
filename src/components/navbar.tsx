@@ -41,7 +41,7 @@ const Navbar = () => {
             />
           </div>
         </div>
-        <hr className="w-screen bg-dark-gray m-0" />
+        <hr className="w-screen m-0" />
       </nav>
     </>
   );

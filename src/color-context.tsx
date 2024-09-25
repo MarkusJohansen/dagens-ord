@@ -11,14 +11,7 @@ export const ColorContext = createContext<ColorContextType>({
 export const ColorProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const colors = [
-    "#fecaca", // red-200
-    "#fed7aa", // orange-200
-    "#f6bd60", // mustard
-    "#caf0f8", // sky
-    "#e9edc9", // light-green
-    "#faedcd", //tan
-  ];
+  const colors = ["#CCD5AE", "#E9EDC9", "#FABE9E", "#99D3FF", "#C2F0FF"];
 
   const [color, setColor] = useState(() => {
     const cachedColor = localStorage.getItem("color");
