@@ -5,13 +5,14 @@ import Logo from "@/components/logo";
 import { useSearchContext } from "@/context/search-context";
 import SearchBar from "./search-bar";
 import { Navlink } from "./navlink";
+import Streak from "./streak";
 
 const Navbar = () => {
   const { color } = useContext(ColorContext);
   const navigate = useNavigate({ from: "/" });
   const [query, setQuery] = useState<string>("");
   const { search } = useSearchContext();
-
+  
   const handleSearch = () => {
     search(query);
     navigate({ to: "/sok" });
@@ -30,12 +31,15 @@ const Navbar = () => {
               <Navlink to="/bidra" label="Bidra" />
             </div>
           </div>
-          <SearchBar
+          <div className="flex">
+            <Streak />
+            <SearchBar
             query={query}
             setQuery={setQuery}
             handleSearch={handleSearch}
             color={color}
-          />
+            />
+          </div>
         </div>
         <hr className="w-screen m-0" />
       </nav>
