@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import type { Expression, Suggestion } from './types';
 
 export const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -8,36 +9,53 @@ export const supabase = createClient(
 export const getSuggestions = async () => {
   const { data, error } = await supabase.from("suggestions").select("*");
 
-  console.log(supabase);
-
-  if (error) {
-    console.error("Error fetching suggestions:", error);
-  } else {
-    console.log("Fetched suggestions:", data);
-  }
-
-  return data;
+  return { data, error };
 };
 
-export const addSuggestion = async (suggestion: string, example: string, definition: string) => {
+export const addSuggestion = async (suggestion: Expression) => {
+  const { error } = await supabase
+    .from('expressions')
+    .insert([suggestion]);
+
+  return { error };
+};
+
+export const updateSuggestion = async (suggestion: Suggestion) => {  
   const { data, error } = await supabase
     .from('suggestions')
-    .insert([{ suggestion, example, definition }]);
+    .update({
+      expression: suggestion.expression,
+      example: suggestion.example,
+      definition: suggestion.definition
+     })
+    .eq('id', suggestion.id);
 
-  if (error) {
-    throw new Error(error.message);
-  }
-  return data;
+  return { data, error };
 };
 
-export const updateSuggestion = async (id: string, suggestion: string) => {
+export const deleteSuggestion = async (suggestion: Suggestion) => {
   const { data, error } = await supabase
-    .from('suggestions')
-    .update({ suggestion })
-    .eq('id', id);
+    .from("suggestions")
+    .delete()
+    .eq("id", suggestion.id);
 
-  if (error) {
-    throw new Error(error.message);
-  }
-  return data;
+    console.log(data)
+    console.log(error)
+
+    return { data, error };
 };
+
+export const signIn = async (userEmail: string, userPassword: string) => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: userEmail,
+    password: userPassword
+  });
+
+  return { data, error };
+}
+
+export const signOut = async () => {
+  const { error } = await supabase.auth.signOut();
+
+  return { error };
+}
