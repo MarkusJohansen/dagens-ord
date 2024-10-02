@@ -1,4 +1,4 @@
-# Dagens Ord Admin App
+# Dagens Ord Dashboard App
 
 Dette er en administrasjonsapplikasjon for **Dagens Ord**, der administratorer kan håndtere forslag fra brukere. Funksjonene inkluderer:
 
