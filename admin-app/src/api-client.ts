@@ -39,9 +39,6 @@ export const deleteSuggestion = async (suggestion: Suggestion) => {
     .delete()
     .eq("id", suggestion.id);
 
-    console.log(data)
-    console.log(error)
-
     return { data, error };
 };
 
