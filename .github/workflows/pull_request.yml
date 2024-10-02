@@ -12,7 +12,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
 
-      - name: Install dependencies and build
+      - name: Install dependencies and build dashboard
         run: |
+          cd admin-app
+          bun install
+          bun build:src
+
+      - name: Install dependencies and build user-app
+        run: |
+          cd user-app
           bun install
           bun build:src
