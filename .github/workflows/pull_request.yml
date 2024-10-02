@@ -14,12 +14,12 @@ jobs:
 
       - name: Install dependencies and build dashboard
         run: |
-          cd admin-app
+          cd dashboard
           bun install
           bun build:src
 
-      - name: Install dependencies and build user-app
+      - name: Install dependencies and build client
         run: |
-          cd user-app
+          cd client
           bun install
           bun build:src
