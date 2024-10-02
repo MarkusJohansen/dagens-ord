@@ -64,7 +64,7 @@
     </button>
   {:else}
     <div class="flex items-center">
-      <p class="text-gray-600">{suggestion.expression}</p>
+      <p class="text-gray-600 max-w-80">{suggestion.expression}</p>
       <button class="bg-transparent border-2 border-solid border-gray-200 text-black hover:bg-gray-200 ml-2 flex items-center justify-center" on:click={() => editExpression = !editExpression}>
         <Icon icon="material-symbols:edit-outline" width="1.2rem" height="1.2rem" />
       </button>
@@ -79,7 +79,7 @@
     </button>
   {:else}
     <div class="flex items-center">
-      <p class="text-gray-600">{suggestion.example}</p>
+      <p class="text-gray-600 max-w-80">{suggestion.example}</p>
       <button class="bg-transparent border-2 border-solid border-gray-200 text-black hover:bg-gray-200 ml-2 flex items-center justify-center" on:click={() => editExample = !editExample}>
         <Icon icon="material-symbols:edit-outline" width="1.2rem" height="1.2rem" />
       </button>
@@ -101,6 +101,7 @@
     </div>
   {/if}
 
+  <div class="my-2" />
   Teit?
   <label class="relative inline-flex items-center cursor-pointer">
     <input type="checkbox" on:click={() => isTeit = !isTeit} class="sr-only peer">

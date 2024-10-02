@@ -57,7 +57,7 @@
 {:else}
   <form class="w-1/4 m-auto flex flex-col">
     Email
-    <input type="text" bind:value={email} />
+    <input type="email" bind:value={email} />
     Passord
     <input type="password" bind:value={password} />
     <button class="m-auto" on:click={handleLogIn}>Logg inn</button>    
