@@ -1,38 +1,21 @@
-# create-svelte
+# Dagens Ord Admin App
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Dette er en administrasjonsapplikasjon for **Dagens Ord**, der administratorer kan håndtere forslag fra brukere. Funksjonene inkluderer:
 
-## Creating a project
+- **Godkjenne** forslag: Brukerens forslag blir lagt til i databasen.
+- **Avslå** forslag: Forslag som ikke er relevante, kan fjernes fra listen.
 
-If you're seeing this, you've probably already done this step. Congrats!
+For å få tilgang til funksjonene, må du ha tilgang til en administratorbruker.
 
+## Bruk
+
+For å starte appen, kjør:
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+bun i
+bun dev
 ```
 
-## Developing
+- Logg inn som administrator.
+- Velg om du vil **godkjenne** eller **avslå** et forslag.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Applikasjonen vil oppdatere seg i sanntid basert på endringer i forslagene.
