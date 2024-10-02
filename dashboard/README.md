@@ -4,6 +4,7 @@ Dette er en administrasjonsapplikasjon for **Dagens Ord**, der administratorer k
 
 - **Godkjenne** forslag: Brukerens forslag blir lagt til i databasen.
 - **Avslå** forslag: Forslag som ikke er relevante, kan fjernes fra listen.
+- **Redigere** forslag: Forslag som er relevante, men må finjusteres, kan endres i appen.
 
 For å få tilgang til funksjonene, må du ha tilgang til en administratorbruker.
 
