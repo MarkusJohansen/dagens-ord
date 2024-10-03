@@ -4,8 +4,6 @@
 
   export let list: Suggestion[] = [];
   export let onSuggestionDeleted = () => {};
-
-
 </script>
 
 <table>
@@ -21,7 +19,7 @@
   </thead>
   <tbody>
     {#each list as suggestion}
-        <SuggestionRow {suggestion} on:delete={onSuggestionDeleted} />
+      <SuggestionRow {suggestion} on:delete={onSuggestionDeleted} />
     {/each}
   </tbody>
 </table>

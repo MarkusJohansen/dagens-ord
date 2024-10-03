@@ -1,6 +1,10 @@
 <script lang="ts">
   import { toast } from "@zerodevx/svelte-toast";
-  import { addSuggestion, deleteSuggestion, updateSuggestion } from "../api-client";
+  import {
+    addSuggestion,
+    deleteSuggestion,
+    updateSuggestion,
+  } from "../api-client";
   import type { Suggestion } from "../types";
   import { createEventDispatcher } from "svelte";
 
@@ -17,38 +21,42 @@
   }
   const dispatch = createEventDispatcher();
 
-  const handleYes = async () => {    
+  const handleYes = async () => {
     const { error } = await addSuggestion({
       expression: suggestion.expression,
       example: suggestion.example,
       definition: suggestion.definition,
-      nsfw: isTeit
+      nsfw: isTeit,
     });
-    if (error) toast.push('Kunne ikke legge forslaget inn i Expressions tabellen: ' + error.message);
+    if (error)
+      toast.push(
+        "Kunne ikke legge forslaget inn i Expressions tabellen: " +
+          error.message
+      );
     else {
-      toast.push('Forslaget er lagt inn i Expressions tabellen.');
+      toast.push("Forslaget er lagt inn i Expressions tabellen.");
       await handleNo();
     }
   };
 
   const handleNo = async () => {
     const { error } = await deleteSuggestion(suggestion);
-    if (error) toast.push('Forslaget kunne ikke slettes fra Suggestions tabellen: ' + error.message);
+    if (error)
+      toast.push(
+        "Forslaget kunne ikke slettes fra Suggestions tabellen: " +
+          error.message
+      );
     else {
-      toast.push('Forslaget er slettet fra Suggestions tabellen.');
-      dispatch('delete');
+      toast.push("Forslaget er slettet fra Suggestions tabellen.");
+      dispatch("delete");
     }
   };
-  
+
   const finishEditing = async () => {
     editExpression = false;
     editExample = false;
     editDefinition = false;
-
-    console.log(suggestion);
-
-    const {error } = await updateSuggestion(suggestion);
-    
+    const { error } = await updateSuggestion(suggestion);
     if (error) toast.push("Kunne ikke redigere forslaget:" + error.message);
     else toast.push("Forslaget er oppdatert.");
   };
@@ -82,7 +90,7 @@
         bind:value={suggestion.expression}
         on:keydown={handleKeydown}
         class="border bg-slate-100"
-        ></textarea>
+      ></textarea>
     {:else}
       {suggestion.expression}
     {/if}
@@ -96,7 +104,7 @@
         bind:value={suggestion.example}
         on:keydown={handleKeydown}
         class="border bg-slate-100"
-        ></textarea>
+      ></textarea>
     {:else}
       {suggestion.example}
     {/if}
@@ -109,7 +117,7 @@
       <textarea
         bind:value={suggestion.definition}
         on:keydown={handleKeydown}
-        class="border bg-slate-100 h-full "
+        class="border bg-slate-100 h-full"
       ></textarea>
     {:else}
       {suggestion.definition}

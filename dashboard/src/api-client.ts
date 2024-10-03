@@ -14,10 +14,12 @@ export const getSuggestions = async () => {
   return { data, error };
 };
 
-export const getExpressionCount = async () => {
-  const { data, error } = await supabase.from("expressions").select("*");
+export const getExpressions = async () => {
+  const { data, count, error } = await supabase
+    .from("expressions")
+    .select("*", { count: "exact" });
 
-  return { data, error };
+  return { data, count, error };
 };
 
 export const addSuggestion = async (suggestion: Expression) => {

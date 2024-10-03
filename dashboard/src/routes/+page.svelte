@@ -3,7 +3,7 @@
   import "chimeracss/build/chimera.css";
   import { SvelteToast, toast } from "@zerodevx/svelte-toast";
   import { onMount } from "svelte";
-  import { getExpressionCount, supabase } from "../api-client";
+  import { getExpressions, supabase } from "../api-client";
   import { signIn, signOut } from "../api-client";
   import Panel from "../lib/Panel.svelte";
   import { getSuggestions } from "../api-client";
@@ -16,6 +16,7 @@
 
   // fetch suggestions
   let suggestions: Suggestion[] = [];
+  let expressionCount = 0;
 
   const fetchSuggestions = async () => {
     const { data, error } = await getSuggestions();
@@ -27,9 +28,9 @@
   };
 
   const fetchExpressionCount = async () => {
-    const { data, error } = await getExpressionCount();
-    if (data) {
-      expressionCount = data;
+    const { count, error } = await getExpressions();
+    if (count) {
+      expressionCount = count;
     } else if (error) {
       toast.push("Kunne ikke hente antall utrykk.");
     }
@@ -37,6 +38,7 @@
 
   const handleSuggestionDeleted = () => {
     fetchSuggestions();
+    fetchExpressionCount();
   };
 
   // Function to check the current session and update isLoggedIn state
@@ -55,6 +57,7 @@
   onMount(() => {
     checkSession();
     fetchSuggestions();
+    fetchExpressionCount();
 
     // Subscribe to auth state changes (e.g., login/logout)
     const {
@@ -100,7 +103,7 @@
         <Panel>
           <p class="text-lg">
             Antall utrykk: <span class="font-semibold">
-              {suggestions.length}
+              {expressionCount}
             </span>
           </p>
         </Panel>
@@ -125,8 +128,8 @@
       <Panel style="col-span-2 row-span-3">
         <h1 class="mt-0">Forslag</h1>
         <Table
-        list={suggestions}
-        onSuggestionDeleted={handleSuggestionDeleted}
+          list={suggestions}
+          onSuggestionDeleted={handleSuggestionDeleted}
         />
       </Panel>
     </div>
