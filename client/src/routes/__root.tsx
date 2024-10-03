@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 
 export const Route = createRootRoute({
   component: () => (
-    <div className="flex-col">
+    <div className="min-h-screen flex flex-col">
       <Toaster position="top-center" reverseOrder={false} />
       <Navbar />
       <Outlet />

@@ -17,7 +17,7 @@ function Index() {
       style={{
         backgroundColor: color,
       }}
-      className=" min-h-screen flex flex-col"
+      className="flex flex-1 flex-col h-full"
     >
       <div className="page-padding flex-grow flex flex-col">
         <main className="flex-grow flex flex-col items-center justify-center ">
