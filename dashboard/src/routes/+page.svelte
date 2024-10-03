@@ -1,15 +1,39 @@
 <script lang="ts">
   import '../app.css';
   import SuggestionList from '$lib/SuggestionList.svelte';
-  import "chimeracss/build/chimera-plain.css";
+  import "chimeracss/build/chimera.css";
   import { SvelteToast, toast } from '@zerodevx/svelte-toast';
   import { onMount } from 'svelte';
   import { supabase } from '../api-client';
   import { signIn, signOut } from '../api-client';
+  import Panel from '../lib/Panel.svelte';
+  import { getSuggestions } from '../api-client';
+  import type { Suggestion } from '../types';
+  import Table from '$lib/Table.svelte';
+
 
   let isLoggedIn = false;
   let email = "";
   let password = "";
+
+  // fetch suggestions
+  let suggestions: Suggestion[] = [];
+
+  const fetchSuggestions = async () => {
+    const { data, error } = await getSuggestions();
+    if (data) {
+      suggestions = data;
+    } else if (error) {
+      toast.push('Kunne ikke hente forslag.');
+    }
+  };
+
+  
+  const handleSuggestionDeleted = () => {
+    fetchSuggestions();
+  };
+
+
 
   // Function to check the current session and update isLoggedIn state
   const checkSession = async () => {
@@ -24,6 +48,7 @@
   // On mount, check the session and set up a subscription to listen for session changes
   onMount(() => {
     checkSession();
+    fetchSuggestions();
 
     // Subscribe to auth state changes (e.g., login/logout)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
@@ -50,9 +75,29 @@
 
 <SvelteToast />
 {#if isLoggedIn}
-  <div class="flex flex-col ">
-    <button class="fixed lg:left-16 top-4" on:click={handleLogOut}>Logg ut</button>
-    <SuggestionList />
+  <div class="flex flex-col h-full min-h-screen w-screen bg-slate-50">
+    <nav class="fixed top-0 w-full h-16 bg-white shadow-lg flex items-center p-6">
+      <button on:click={handleLogOut}>Logg ut</button>
+    </nav>
+    <div class="mt-24 grid gap-4 p-10">
+      <div class="grid gap-4 grid-cols-2 grid-flow-dense">
+        <Panel>
+          <p class="text-lg">Antall forslag: <span class="font-semibold">
+            {suggestions.length}
+          </span></p>
+        </Panel>
+        <Panel>
+          <p class="text-lg">Antall utrykk: <span class="font-semibold">
+            {suggestions.length}
+          </span></p>
+        </Panel>
+      </div>
+      <Panel>
+        <h1>Forslag</h1>
+        <Table list={suggestions} onSuggestionDeleted={handleSuggestionDeleted}/>
+      </Panel>
+    </div>
+    <SuggestionList suggestions={suggestions} onSuggestionDeleted={handleSuggestionDeleted}/> -->
   </div>
 {:else}
   <div class="w-screen h-screen flex justify-center items-center bg-slate-50">
