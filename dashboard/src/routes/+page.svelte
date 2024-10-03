@@ -50,16 +50,22 @@
 
 <SvelteToast />
 {#if isLoggedIn}
-  <div class="flex flex-col">
+  <div class="flex flex-col ">
     <button class="fixed lg:left-16 top-4" on:click={handleLogOut}>Logg ut</button>
     <SuggestionList />
   </div>
 {:else}
-  <form class="w-1/4 m-auto flex flex-col">
-    Email
-    <input type="email" bind:value={email} />
-    Passord
-    <input type="password" bind:value={password} />
-    <button class="m-auto" on:click={handleLogIn}>Logg inn</button>    
-  </form>
+  <div class="w-screen h-screen flex justify-center items-center bg-slate-50">
+    <div class="border-1 rounded-md p-6 flex flex-col items-center shadow-2xl bg-white">
+      <h2>Dagens Ord Adminstrator Dashboard</h2>
+      <hr/>
+      <form class="w-full flex flex-col ">
+        Email
+        <input type="email" bind:value={email} />
+        Passord
+        <input type="password" bind:value={password} />
+        <button class="m-auto" on:click={handleLogIn}>Logg inn</button>    
+      </form>
+    </div>
+  </div>
 {/if}
