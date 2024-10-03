@@ -9,10 +9,9 @@
   import { getSuggestions } from "../api-client";
   import type { Suggestion } from "../types";
   import Table from "$lib/Table.svelte";
+  import Login from "$lib/Login.svelte";
 
   let isLoggedIn = false;
-  let email = "";
-  let password = "";
 
   // fetch suggestions
   let suggestions: Suggestion[] = [];
@@ -72,11 +71,6 @@
     };
   });
 
-  const handleLogIn = async () => {
-    const { error } = await signIn(email, password);
-    if (error) toast.push("Kunne ikke logge inn: " + error);
-  };
-
   const handleLogOut = async () => {
     const { error } = await signOut();
     if (error) toast.push("Kunne ikke logge ut: " + error);
@@ -135,19 +129,5 @@
     </div>
   </div>
 {:else}
-  <div class="w-screen h-screen flex justify-center items-center bg-slate-50">
-    <div
-      class="border-1 rounded-md p-6 flex flex-col items-center shadow-2xl bg-white"
-    >
-      <h2>Dagens Ord Adminstrator Dashboard</h2>
-      <hr />
-      <form class="w-full flex flex-col">
-        Email
-        <input type="email" bind:value={email} />
-        Passord
-        <input type="password" bind:value={password} />
-        <button class="m-auto" on:click={handleLogIn}>Logg inn</button>
-      </form>
-    </div>
-  </div>
+  <Login/>
 {/if}
