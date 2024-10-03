@@ -17,7 +17,7 @@
   }
   const dispatch = createEventDispatcher();
 
-  const handleYes = async () => {
+  const handleYes = async () => {    
     const { error } = await addSuggestion({
       expression: suggestion.expression,
       example: suggestion.example,
@@ -45,7 +45,10 @@
     editExample = false;
     editDefinition = false;
 
-    const { error } = await updateSuggestion(suggestion);
+    console.log(suggestion);
+
+    const {error } = await updateSuggestion(suggestion);
+    
     if (error) toast.push("Kunne ikke redigere forslaget:" + error.message);
     else toast.push("Forslaget er oppdatert.");
   };
@@ -58,7 +61,6 @@
   };
 
   const onCellClick = (cellType: SuggestionCell) => {
-    console.log("cell clicked", cellType);
     if (cellType === SuggestionCell.Expression && !editExpression) {
       editExpression = true;
     } else if (cellType === SuggestionCell.Example && !editExample) {
@@ -79,8 +81,8 @@
       <textarea
         bind:value={suggestion.expression}
         on:keydown={handleKeydown}
-        class="border-none bg-blue-200 h-full w-full"
-      ></textarea>
+        class="border bg-slate-100"
+        ></textarea>
     {:else}
       {suggestion.expression}
     {/if}
@@ -93,8 +95,8 @@
       <textarea
         bind:value={suggestion.example}
         on:keydown={handleKeydown}
-        class="border-none bg-blue-200 h-full w-full"
-      ></textarea>
+        class="border bg-slate-100"
+        ></textarea>
     {:else}
       {suggestion.example}
     {/if}
@@ -105,11 +107,10 @@
   >
     {#if editDefinition}
       <textarea
-        ´
         bind:value={suggestion.definition}
         on:keydown={handleKeydown}
-        class="border-none bg-blue-200 h-20 w-full"
-      />
+        class="border bg-slate-100 h-full "
+      ></textarea>
     {:else}
       {suggestion.definition}
     {/if}

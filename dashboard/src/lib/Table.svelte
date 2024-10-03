@@ -1,5 +1,4 @@
 <script lang="ts">
-  import Icon from "@iconify/svelte";
   import type { Suggestion } from "../types";
   import SuggestionRow from "./SuggestionRow.svelte";
 

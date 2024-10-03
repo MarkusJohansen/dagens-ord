@@ -1,16 +1,14 @@
 <script lang="ts">
-  import '../app.css';
-  import SuggestionList from '$lib/SuggestionList.svelte';
+  import "../app.css";
   import "chimeracss/build/chimera.css";
-  import { SvelteToast, toast } from '@zerodevx/svelte-toast';
-  import { onMount } from 'svelte';
-  import { supabase } from '../api-client';
-  import { signIn, signOut } from '../api-client';
-  import Panel from '../lib/Panel.svelte';
-  import { getSuggestions } from '../api-client';
-  import type { Suggestion } from '../types';
-  import Table from '$lib/Table.svelte';
-
+  import { SvelteToast, toast } from "@zerodevx/svelte-toast";
+  import { onMount } from "svelte";
+  import { getExpressionCount, supabase } from "../api-client";
+  import { signIn, signOut } from "../api-client";
+  import Panel from "../lib/Panel.svelte";
+  import { getSuggestions } from "../api-client";
+  import type { Suggestion } from "../types";
+  import Table from "$lib/Table.svelte";
 
   let isLoggedIn = false;
   let email = "";
@@ -24,20 +22,28 @@
     if (data) {
       suggestions = data;
     } else if (error) {
-      toast.push('Kunne ikke hente forslag.');
+      toast.push("Kunne ikke hente forslag.");
     }
   };
 
-  
+  const fetchExpressionCount = async () => {
+    const { data, error } = await getExpressionCount();
+    if (data) {
+      expressionCount = data;
+    } else if (error) {
+      toast.push("Kunne ikke hente antall utrykk.");
+    }
+  };
+
   const handleSuggestionDeleted = () => {
     fetchSuggestions();
   };
 
-
-
   // Function to check the current session and update isLoggedIn state
   const checkSession = async () => {
-    const { data: { session } } = await supabase.auth.getSession();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
     if (session) {
       isLoggedIn = true;
     } else {
@@ -51,8 +57,10 @@
     fetchSuggestions();
 
     // Subscribe to auth state changes (e.g., login/logout)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      checkSession();  // Re-check session when there's a change
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      checkSession(); // Re-check session when there's a change
     });
 
     // Clean up the subscription on component unmount
@@ -63,53 +71,79 @@
 
   const handleLogIn = async () => {
     const { error } = await signIn(email, password);
-    if (error) toast.push('Kunne ikke logge inn: ' + error);
-  }
+    if (error) toast.push("Kunne ikke logge inn: " + error);
+  };
 
   const handleLogOut = async () => {
     const { error } = await signOut();
-    if (error) toast.push('Kunne ikke logge ut: ' + error);
-  }
-
+    if (error) toast.push("Kunne ikke logge ut: " + error);
+  };
 </script>
 
 <SvelteToast />
 {#if isLoggedIn}
   <div class="flex flex-col h-full min-h-screen w-screen bg-slate-50">
-    <nav class="fixed top-0 w-full h-16 bg-white shadow-lg flex items-center p-6">
+    <nav
+      class="fixed top-0 w-full h-16 bg-white shadow-lg flex items-center p-6"
+    >
       <button on:click={handleLogOut}>Logg ut</button>
     </nav>
-    <div class="mt-24 grid gap-4 p-10">
-      <div class="grid gap-4 grid-cols-2 grid-flow-dense">
+    <div class="mt-24 grid gap-4 p-10 grid-cols-1 lg:grid-cols-3">
+      <div class="grid gap-4">
         <Panel>
-          <p class="text-lg">Antall forslag: <span class="font-semibold">
-            {suggestions.length}
-          </span></p>
+          <p class="text-lg">
+            Antall forslag: <span class="font-semibold">
+              {suggestions.length}
+            </span>
+          </p>
         </Panel>
         <Panel>
-          <p class="text-lg">Antall utrykk: <span class="font-semibold">
-            {suggestions.length}
-          </span></p>
+          <p class="text-lg">
+            Antall utrykk: <span class="font-semibold">
+              {suggestions.length}
+            </span>
+          </p>
+        </Panel>
+        <Panel>
+          <h3 class="mt-0">Retningslinjer for utrykk</h3>
+          <p>
+            For at et utrykk skal kunne bli godkjennt må det opfylle følgende
+            krav:
+          </p>
+          <ul>
+            <li>Utrykket må være norsk</li>
+            <li>Utrykket må være morsomt eller ha en morsom ordlyd</li>
+            <li>Utrykket må være forståelig for de fleste</li>
+            <li>
+              Utrykket skal kunne være såpass dialektnøytralt, at hvem som helst
+              skal kunne bruke det
+            </li>
+            <li>Utrykket skal ikke være rasistisk eller homofobisk</li>
+          </ul>
         </Panel>
       </div>
-      <Panel>
-        <h1>Forslag</h1>
-        <Table list={suggestions} onSuggestionDeleted={handleSuggestionDeleted}/>
+      <Panel style="col-span-2 row-span-3">
+        <h1 class="mt-0">Forslag</h1>
+        <Table
+        list={suggestions}
+        onSuggestionDeleted={handleSuggestionDeleted}
+        />
       </Panel>
     </div>
-    <SuggestionList suggestions={suggestions} onSuggestionDeleted={handleSuggestionDeleted}/> -->
   </div>
 {:else}
   <div class="w-screen h-screen flex justify-center items-center bg-slate-50">
-    <div class="border-1 rounded-md p-6 flex flex-col items-center shadow-2xl bg-white">
+    <div
+      class="border-1 rounded-md p-6 flex flex-col items-center shadow-2xl bg-white"
+    >
       <h2>Dagens Ord Adminstrator Dashboard</h2>
-      <hr/>
-      <form class="w-full flex flex-col ">
+      <hr />
+      <form class="w-full flex flex-col">
         Email
         <input type="email" bind:value={email} />
         Passord
         <input type="password" bind:value={password} />
-        <button class="m-auto" on:click={handleLogIn}>Logg inn</button>    
+        <button class="m-auto" on:click={handleLogIn}>Logg inn</button>
       </form>
     </div>
   </div>
