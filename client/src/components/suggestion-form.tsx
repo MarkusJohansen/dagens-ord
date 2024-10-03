@@ -14,15 +14,8 @@ export const SuggestionForm = () => {
     definition: explanation,
   });
 
-  const onFormSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    setWord("");
-    setExample("");
-    setExplanation("");
-  }
-
   return (
-    <form className="flex flex-col gap-2" onSubmit={onFormSubmit}>
+    <div className="flex flex-col gap-2">
       <label htmlFor="word">
         Ord eller uttrykk:
         <input
@@ -31,11 +24,11 @@ export const SuggestionForm = () => {
           placeholder="En vinge"
           value={word}
           onChange={(e) => setWord(e.target.value)}
-          className="placeholder:text-light-gray border-black focus:shadow-xl"
+          className="placeholder:text-light-gray border-black"
           style={{ background: color }}
         />
       </label>
-      <label htmlFor="example">
+      <label htmlFor="example" className="">
         Eksempel:
         <input
           type="text"
@@ -43,11 +36,11 @@ export const SuggestionForm = () => {
           placeholder="Skal du ha deg en vinge eller?"
           value={example}
           onChange={(e) => setExample(e.target.value)}
-          className="placeholder:text-light-gray border-black focus:shadow-xl"
+          className="placeholder:text-light-gray border-black"
           style={{ background: color }}
         />
       </label>
-      <label htmlFor="explanation">
+      <label htmlFor="explanation" className="">
         Forklaring:
         <input
           type="text"
@@ -55,13 +48,13 @@ export const SuggestionForm = () => {
           placeholder="Et hardt slag"
           value={explanation}
           onChange={(e) => setExplanation(e.target.value)}
-          className="placeholder:text-light-gray border-black focus:shadow-xl"
+          className="placeholder:text-light-gray border-black"
           style={{ background: color }}
         />
       </label>
-      <button style={{ color: color }} className="focus:shadow-xl" onClick={() => suggest()}>
+      <button style={{ color: color }} onClick={() => suggest()}>
         Send inn forslag
       </button>
-    </form>
+    </div>
   );
 };
