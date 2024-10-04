@@ -25,7 +25,7 @@ const Sidebar = ({
         sidebarOpen ? "translate-x-0" : "translate-x-full"
       }`}
       style={{
-        backgroundColor: color, // Use dynamic color from context
+        backgroundColor: color,
       }}
     >
       <div className="flex flex-col h-full w-64 p-4">
