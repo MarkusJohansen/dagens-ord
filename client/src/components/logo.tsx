@@ -1,17 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/img/logo.png";
 
-interface LogoProps {
-  onClick?: () => void; // Optional onClick prop
-}
-
-const Logo: React.FC<LogoProps> = ({ onClick }) => {
+const Logo = () => {
   return (
     <Link to="/">
-      <div
-        className="mx-2 my-auto h-full cursor-pointer" // Add cursor-pointer for better UX
-        onClick={onClick} // Call the onClick function if provided
-      >
+      <div className="mx-2 my-auto h-full">
         <img src={logo} alt="logo" className="w-16" />
       </div>
     </Link>
