@@ -48,7 +48,7 @@ const Navbar = () => {
       <nav style={{ backgroundColor: color }}>
         <div className="page-padding py-2 flex flex-row w-full justify-between items-center">
           <div className="flex items-center gap-14">
-            <Logo onClick={() => setSidebarOpen(false)} />
+            <Logo />
             <div className="hidden md:flex gap-6">
               <Navlink to="/om-prosjektet" label="Om prosjektet" />
               <Navlink to="/bidra" label="Bidra" />
