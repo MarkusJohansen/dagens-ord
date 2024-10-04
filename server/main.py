@@ -25,6 +25,7 @@ async def get_all_suggestions():
 async def search_expression(query: str):
     return supabase.table("expressions").select("*").ilike("expression", f"%{query}%").execute()
 
+#test
 
 
 #TODO: Implement the following routes
