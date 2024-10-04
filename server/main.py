@@ -15,12 +15,11 @@ app = FastAPI()
 #GETS
 @app.get("/")
 async def get_all_expressions():
-    return supabase.table("expressions").select("*").execute()
+    return supabase.table("expressions").select("*", count="exact").execute()
 
-
-@app.get("/expression_count")
-async def fetch_expression_count():
-    return {"data": supabase.table("expressions").select("id", count="exact").execute().count}
+@app.get("/suggestions")
+async def get_all_suggestions():
+    return supabase.table("suggestions").select("*", count="exact").execute()
 
 @app.post("/search/{query}")
 async def search_expression(query: str):
