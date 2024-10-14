@@ -13,7 +13,7 @@ function Contribute() {
   return (
     <div
       className={clsx(
-        "page-padding min-h-screen w-screen",
+        "page-padding flex-1 h-full w-screen",
         "flex flex-col items-center justify-center"
       )}
       style={{ backgroundColor: color }}
