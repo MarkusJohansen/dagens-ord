@@ -32,18 +32,26 @@ function About() {
           stolt vist fram det lille prosjektet vårt, skjønte vi at vi at det er
           flere der ute som har en forkjærlighet for det norske språket. Derfor
           har vi lagt til rette for at du kan
+          {" "}
           <Link
             className="underline  text-black hover:text-gray-500 active:text-gray-600 "
             to="/bidra"
           >
-            {" "}
             bidra med dine egne utrykk
           </Link>
           . Vi gleder oss til å se hva dere har å by på!
         </p>
         <p>
           Hvis du har lyst til å bidra til prosjektet på en annen måte, kan du
-          ta en titt på Github repoet vårt! Vi tar gjerne imot pull requests,
+          ta en titt på
+          {" "}
+          <a
+            className="underline  text-black hover:text-gray-500 active:text-gray-600 "
+            href="https://github.com/MarkusJohansen/dagens-ord"
+          >
+          Github repoet vårt
+          </a>
+          ! Vi tar gjerne imot pull requests,
           issues og forslag til forbedringer.
         </p>
         <div className="flex gap-3 items-end mb-4">
