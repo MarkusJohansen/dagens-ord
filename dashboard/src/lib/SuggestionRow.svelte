@@ -62,10 +62,7 @@
   };
 
   const handleKeydown = (event: KeyboardEvent) => {
-    if (event.key === "Enter") {
-      event.preventDefault(); // Prevents the default action of pressing Enter inside a textarea
-      finishEditing();
-    }
+    if (event.key === "Enter") finishEditing();
   };
 
   const onCellClick = (cellType: SuggestionCell) => {
@@ -77,6 +74,16 @@
       editDefinition = true;
     }
   };
+
+  let editableDiv: HTMLDivElement;
+
+  function updateField(event: Event, type: string) {
+    const target = event.currentTarget as HTMLDivElement;
+    if (type === 'expression') suggestion.expression = target.innerText;
+    else if (type === 'example') suggestion.example = target.innerText;
+    else suggestion.definition = target.innerText;
+  }
+
 </script>
 
 <tr>
@@ -86,11 +93,18 @@
     on:click={() => onCellClick(SuggestionCell.Expression)}
   >
     {#if editExpression}
-      <textarea
-        bind:value={suggestion.expression}
+      <div
+        contenteditable="true"
+        role="textbox"
+        aria-multiline="true"
+        tabindex="0"
+        class="border-solid border-black border-4 bg-slate-100 w-full h-full"
         on:keydown={handleKeydown}
-        class="border bg-slate-100"
-      ></textarea>
+        bind:this={editableDiv}
+        on:input={(e) => updateField(e, 'expression')}
+      >
+        {suggestion.expression}
+     </div>
     {:else}
       {suggestion.expression}
     {/if}
@@ -100,11 +114,18 @@
     on:click={() => onCellClick(SuggestionCell.Example)}
   >
     {#if editExample}
-      <textarea
-        bind:value={suggestion.example}
+      <div
+        contenteditable="true"
+        role="textbox"
+        aria-multiline="true"
+        tabindex="0"
+        class="border bg-slate-100 w-full"
         on:keydown={handleKeydown}
-        class="border bg-slate-100"
-      ></textarea>
+        bind:this={editableDiv}
+        on:input={(e) => updateField(e, 'example')}
+      >
+        {suggestion.example}
+      </div>
     {:else}
       {suggestion.example}
     {/if}
@@ -114,15 +135,22 @@
     on:click={() => onCellClick(SuggestionCell.Definition)}
   >
     {#if editDefinition}
-      <textarea
-        bind:value={suggestion.definition}
+      <div
+        contenteditable="true"
+        role="textbox"
+        aria-multiline="true"
+        tabindex="0"
+        class="border bg-slate-100 w-full"
         on:keydown={handleKeydown}
-        class="border bg-slate-100 h-full"
-      ></textarea>
+        bind:this={editableDiv}
+        on:input={(e) => updateField(e, 'definition')}
+      >
+        {suggestion.definition}
+      </div>
     {:else}
       {suggestion.definition}
     {/if}
-  </td>
+</td>
   <td>
     <label class="relative inline-flex items-center cursor-pointer">
       <input
