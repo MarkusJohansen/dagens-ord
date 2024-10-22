@@ -98,7 +98,7 @@
         role="textbox"
         aria-multiline="true"
         tabindex="0"
-        class="border-solid border-black border-4 bg-slate-100 w-full h-full"
+        class="border bg-slate-100 w-full"
         on:keydown={handleKeydown}
         bind:this={editableDiv}
         on:input={(e) => updateField(e, 'expression')}
