@@ -33,6 +33,7 @@
     "@iconify/svelte": "^4.0.2",
     "@supabase/supabase-js": "^2.45.4",
     "@zerodevx/svelte-toast": "^0.9.6",
-    "chimeracss": "^1.5.0"
+    "chimeracss": "^1.5.0",
+    "esbuild": "^0.24.0"
   }
 }
