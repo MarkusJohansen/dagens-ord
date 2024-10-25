@@ -9,7 +9,8 @@ export const supabase = createClient(
 export const getSuggestions = async () => {
   const { data, error } = await supabase
     .from("suggestions")
-    .select("*", { count: "exact" });
+    .select("*", { count: "exact" })
+    .order("id", { ascending: false });
 
   return { data, error };
 };
@@ -23,9 +24,24 @@ export const getExpressions = async () => {
 };
 
 export const addSuggestion = async (suggestion: Expression) => {
-  const { error } = await supabase.from("expressions").insert([suggestion]);
+  const { data: existingSuggestions, error: selectError } = await supabase
+    .from("expressions")
+    .select("*")
+    .eq("expression", suggestion.expression);
 
-  return { error };
+  if (selectError) {
+    return { error: selectError };
+  }
+
+  if (existingSuggestions && existingSuggestions.length > 0) {
+    return { error: { message: "Dette uttrykket finnes allerede i databasen." }};
+  }
+
+  const { error: insertError } = await supabase
+    .from("expressions")
+    .insert([suggestion]);
+
+  return { error: insertError };
 };
 
 export const updateSuggestion = async (suggestion: Suggestion) => {
