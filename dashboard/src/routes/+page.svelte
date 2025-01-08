@@ -3,13 +3,19 @@
   import "chimeracss/build/chimera.css";
   import { SvelteToast, toast } from "@zerodevx/svelte-toast";
   import { onMount } from "svelte";
-  import { getExpressions, supabase } from "../api-client";
-  import { signIn, signOut } from "../api-client";
+  import { getExpressions } from "../api-client";
+  import { signOut } from "../api-client";
   import Panel from "../lib/Panel.svelte";
   import { getSuggestions } from "../api-client";
   import type { Suggestion } from "../types";
   import Table from "$lib/Table.svelte";
   import Login from "$lib/Login.svelte";
+  import { createClient } from "@supabase/supabase-js";
+
+  const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_API_KEY
+  );
 
   let isLoggedIn = false;
 
@@ -20,7 +26,7 @@
   const fetchSuggestions = async () => {
     const { data, error } = await getSuggestions();
     if (data) {
-      suggestions = data;
+      suggestions = data.data;
     } else if (error) {
       toast.push("Kunne ikke hente forslag.");
     }
@@ -44,7 +50,7 @@
   const checkSession = async () => {
     const {
       data: { session },
-    } = await supabase.auth.getSession();
+    } = await supabase.auth.getSession(); // TODO move to backend
     if (session) {
       isLoggedIn = true;
     } else {

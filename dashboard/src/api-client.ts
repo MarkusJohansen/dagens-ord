@@ -1,82 +1,124 @@
-import { createClient } from "@supabase/supabase-js";
 import type { Expression, Suggestion } from "./types";
 
-export const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_API_KEY
-);
+const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 export const getSuggestions = async () => {
-  const { data, error } = await supabase
-    .from("suggestions")
-    .select("*", { count: "exact" })
-    .order("id", { ascending: false });
-
-  return { data, error };
+  try {
+    const response = await fetch(`${serverUrl}/suggestions`);
+    const data = await response.json();
+    return { data, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
 };
 
 export const getExpressions = async () => {
-  const { data, count, error } = await supabase
-    .from("expressions")
-    .select("*", { count: "exact" });
+  try {
+    const response = await fetch(`${serverUrl}/expressions`);
+    const data = await response.json();
+    return { data: data.items, count: data.count, error: null };
+  } catch (error) {
+    return { data: null, count: 0, error };
+  }
+};
 
-  return { data, count, error };
+export const fetchAllExpressions = async () => {
+  const response = await fetch(`${serverUrl}/expressions`);
+  const { data, error } = await response.json();
+  return { data, error };
 };
 
 export const addSuggestion = async (suggestion: Expression) => {
-  const { data: existingSuggestions, error: selectError } = await supabase
-    .from("expressions")
-    .select("*")
-    .eq("expression", suggestion.expression);
+  try {
+    const response = await fetch(`${serverUrl}/suggest/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(suggestion),
+    });
 
-  if (selectError) {
-    return { error: selectError };
+    const data = await response.json();
+    return { data, error: null };
+  } catch (error) {
+    return { error };
   }
-
-  if (existingSuggestions && existingSuggestions.length > 0) {
-    return { error: { message: "Dette uttrykket finnes allerede i databasen." }};
-  }
-
-  const { error: insertError } = await supabase
-    .from("expressions")
-    .insert([suggestion]);
-
-  return { error: insertError };
 };
 
 export const updateSuggestion = async (suggestion: Suggestion) => {
-  const { error } = await supabase
-    .from("suggestions")
-    .update({
-      expression: suggestion.expression,
-      example: suggestion.example,
-      definition: suggestion.definition,
-    })
-    .eq("id", suggestion.id);
+  try {
+    const response = await fetch(`${serverUrl}/suggestions/${suggestion.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(suggestion),
+    });
 
-  return { error };
+    if (!response.ok) {
+      const errorData = await response.json();
+      return { error: errorData };
+    }
+
+    return { error: null };
+  } catch (error) {
+    return { error };
+  }
 };
 
 export const deleteSuggestion = async (suggestion: Suggestion) => {
-  const { data, error } = await supabase
-    .from("suggestions")
-    .delete()
-    .eq("id", suggestion.id);
+  try {
+    const response = await fetch(`${serverUrl}/suggestions/${suggestion.id}`, {
+      method: "DELETE",
+    });
 
-  return { data, error };
+    if (!response.ok) {
+      throw new Error("Failed to delete suggestion.");
+    }
+
+    const data = await response.json();
+    return { data, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
 };
 
+// Sign in user
 export const signIn = async (userEmail: string, userPassword: string) => {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: userEmail,
-    password: userPassword,
-  });
+  try {
+    const response = await fetch(`${serverUrl}/auth/sign-in`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: userEmail, password: userPassword }),
+    });
 
-  return { data, error };
+    if (!response.ok) {
+      const errorData = await response.json();
+      return { data: null, error: errorData };
+    }
+
+    const data = await response.json();
+    return { data, error: null };
+  } catch (error) {
+    return { data: null, error };
+  }
 };
 
+// Sign out user
 export const signOut = async () => {
-  const { error } = await supabase.auth.signOut();
+  try {
+    const response = await fetch(`${serverUrl}/auth/sign-out`, {
+      method: "POST",
+    });
 
-  return { error };
+    if (!response.ok) {
+      throw new Error("Failed to sign out.");
+    }
+
+    return { error: null };
+  } catch (error) {
+    return { error };
+  }
 };

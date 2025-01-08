@@ -1,44 +1,40 @@
-import { createClient } from "@supabase/supabase-js";
 import { SuggestExpression } from "./types";
 
-export const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_API_KEY
-);
+const serverUrl = import.meta.env.VITE_SERVER_URL;
 
 export const fetchAllExpressions = async () => {
-  const { data, error } = await supabase.from("expressions").select("*");
+  const response = await fetch(`${serverUrl}/expressions`);
+  const { data, error } = await response.json();
   return { data, error };
 };
 
 export const fetchExpression = async () => {
-  const { data, error } = await supabase
-  .from("random_expression")
-  .select("*")
-  .eq("nsfw", false)
-  .limit(1); 
-  return { data, error };
-};
+  const response = await fetch(`${serverUrl}/random_expression`);
+  const { data, error } = await response.json();
+  return { data, error };};
+
 
 export const suggestNewExpression = async (expression: SuggestExpression) => {
-  const { error } = await supabase.from("suggestions").insert({
-    expression: expression.expression,
-    example: expression.example,
-    definition: expression.definition,
+  const response = await fetch(`${serverUrl}/suggest/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(expression),
   });
+
+  const { error } = await response.json();
   return { error };
 };
 
 export const fetchSuggestionRowCount = async () => {
-  const { data, error } = await supabase.from("suggestions").select("id");
+  const response = await fetch(`${serverUrl}/suggestion_count`);
+  const { data, error } = await response.json();
   return { data, error };
 };
 
 export const searchExpression = async (query: string) => {
-  const { data, error } = await supabase
-    .from("expressions")
-    .select()
-    .ilike("expression", `%${query}%`) // Case-insensitive partial match
-    .eq("nsfw", false);
+  const response = await fetch(`${serverUrl}/search/${query}`);
+  const { data, error } = await response.json();
   return { data, error };
 };
