@@ -7,14 +7,29 @@ export const useGetNsfwExpression = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetch = async () => {
+    const fetchNew = async () => {
+      const today = new Date().toISOString().split("T")[0];
+      const lastFetchDate = localStorage.getItem("nsfwLastFetchDate");
+      const stored = localStorage.getItem("nsfwStoredExpression");
+
+      if (stored && lastFetchDate === today) {
+        setExpression(JSON.parse(stored));
+        setIsLoading(false);
+        return;
+      }
+
       setIsLoading(true);
       const { data, error } = await fetchNsfwExpression();
       if (error) console.error("Error fetching NSFW expression", error);
-      if (data) setExpression(data[0]);
+      if (data) {
+        setExpression(data[0]);
+        localStorage.setItem("nsfwLastFetchDate", today);
+        localStorage.setItem("nsfwStoredExpression", JSON.stringify(data[0]));
+      }
       setIsLoading(false);
     };
-    fetch();
+
+    fetchNew();
   }, []);
 
   return { expression, isLoading };

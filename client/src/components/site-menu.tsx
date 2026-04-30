@@ -23,10 +23,7 @@ export const SiteMenu = () => {
           open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="page-padding flex justify-between items-center pt-5 pb-4 border-b-2 border-white border-opacity-20 shrink-0">
-          <span className="font-black text-[10px] uppercase tracking-[0.3em] text-white opacity-40">
-            ★ DAGENS ORD
-          </span>
+        <div className="page-padding flex justify-end items-center pt-5 pb-4 border-b-2 border-white border-opacity-20 shrink-0">
           <button
             onClick={close}
             className="border-2 border-white text-white font-black text-[10px] uppercase tracking-[0.3em] px-3 py-2 hover:bg-white hover:text-black transition-colors"
@@ -40,7 +37,6 @@ export const SiteMenu = () => {
             { to: "/", label: "HJEM" },
             { to: "/om-prosjektet", label: "OM OSS" },
             { to: "/bidra", label: "BIDRA" },
-            { to: "/nsfw", label: "NSFW ★" },
           ].map(({ to, label }) => (
             <Link
               key={to}

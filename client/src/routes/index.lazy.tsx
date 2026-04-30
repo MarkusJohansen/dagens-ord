@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useGetNewExpression } from "@/hooks/use-get-random-expression";
 import { ColorContext } from "@/color-context";
 import { useTypewriter } from "@/hooks/use-typewriter";
+import { useFitText } from "@/hooks/use-fit-text";
 
 export const Route = createLazyFileRoute("/")({
   component: Index,
@@ -21,23 +22,20 @@ function Index() {
     : expression.definition;
 
   const { displayed, done } = useTypewriter(word, 50);
+  const { ref, fontSize } = useFitText(word);
 
   return (
     <div style={{ backgroundColor: color }} className="flex flex-col h-full">
-
-      {/* The word — fills everything between masthead and bottom panel */}
       <div className="page-padding flex-1 flex items-center min-h-0 py-4 overflow-hidden">
         <h1
-          className={`font-black uppercase leading-[0.85] break-words w-full ${
-            !done ? "typewriter-cursor" : ""
-          }`}
-          style={{ fontSize: "clamp(3.5rem, 13vw, 16rem)" }}
+          ref={ref}
+          className={`font-black uppercase leading-[0.85] whitespace-nowrap ${!done ? "typewriter-cursor" : ""}`}
+          style={{ fontSize }}
         >
-          {displayed || " "}
+          {displayed || " "}
         </h1>
       </div>
 
-      {/* Bottom: example + explanation */}
       <div className="border-t-4 border-black shrink-0">
         <div className="page-padding grid grid-cols-1 md:grid-cols-2">
           <div className="py-5 md:border-r-2 border-black md:pr-10 border-b-2 md:border-b-0">

@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { ColorContext } from "@/color-context";
 import { useGetNsfwExpression } from "@/hooks/use-get-nsfw-expression";
 import { useTypewriter } from "@/hooks/use-typewriter";
+import { useFitText } from "@/hooks/use-fit-text";
 
 export const Route = createLazyFileRoute("/nsfw")({
   component: Nsfw,
@@ -21,15 +22,15 @@ function Nsfw() {
     : expression.definition;
 
   const { displayed, done } = useTypewriter(word, 50);
+  const { ref, fontSize } = useFitText(word);
 
   return (
     <div style={{ backgroundColor: color }} className="flex flex-col h-full">
       <div className="page-padding flex-1 flex items-center min-h-0 py-4 overflow-hidden">
         <h1
-          className={`font-black uppercase leading-[0.85] break-words w-full ${
-            !done ? "typewriter-cursor" : ""
-          }`}
-          style={{ fontSize: "clamp(3.5rem, 13vw, 16rem)" }}
+          ref={ref}
+          className={`font-black uppercase leading-[0.85] whitespace-nowrap ${!done ? "typewriter-cursor" : ""}`}
+          style={{ fontSize }}
         >
           {displayed || " "}
         </h1>
