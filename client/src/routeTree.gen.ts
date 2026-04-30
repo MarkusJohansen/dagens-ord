@@ -16,22 +16,22 @@ import { Route as rootRoute } from './routes/__root'
 
 // Create Virtual Routes
 
-const SokLazyImport = createFileRoute('/sok')()
 const OmProsjektetLazyImport = createFileRoute('/om-prosjektet')()
+const NsfwLazyImport = createFileRoute('/nsfw')()
 const BidraLazyImport = createFileRoute('/bidra')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
 
-const SokLazyRoute = SokLazyImport.update({
-  path: '/sok',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/sok.lazy').then((d) => d.Route))
-
 const OmProsjektetLazyRoute = OmProsjektetLazyImport.update({
   path: '/om-prosjektet',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/om-prosjektet.lazy').then((d) => d.Route))
+
+const NsfwLazyRoute = NsfwLazyImport.update({
+  path: '/nsfw',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() => import('./routes/nsfw.lazy').then((d) => d.Route))
 
 const BidraLazyRoute = BidraLazyImport.update({
   path: '/bidra',
@@ -61,18 +61,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BidraLazyImport
       parentRoute: typeof rootRoute
     }
+    '/nsfw': {
+      id: '/nsfw'
+      path: '/nsfw'
+      fullPath: '/nsfw'
+      preLoaderRoute: typeof NsfwLazyImport
+      parentRoute: typeof rootRoute
+    }
     '/om-prosjektet': {
       id: '/om-prosjektet'
       path: '/om-prosjektet'
       fullPath: '/om-prosjektet'
       preLoaderRoute: typeof OmProsjektetLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/sok': {
-      id: '/sok'
-      path: '/sok'
-      fullPath: '/sok'
-      preLoaderRoute: typeof SokLazyImport
       parentRoute: typeof rootRoute
     }
   }
@@ -83,46 +83,46 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/bidra': typeof BidraLazyRoute
+  '/nsfw': typeof NsfwLazyRoute
   '/om-prosjektet': typeof OmProsjektetLazyRoute
-  '/sok': typeof SokLazyRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/bidra': typeof BidraLazyRoute
+  '/nsfw': typeof NsfwLazyRoute
   '/om-prosjektet': typeof OmProsjektetLazyRoute
-  '/sok': typeof SokLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/bidra': typeof BidraLazyRoute
+  '/nsfw': typeof NsfwLazyRoute
   '/om-prosjektet': typeof OmProsjektetLazyRoute
-  '/sok': typeof SokLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/bidra' | '/om-prosjektet' | '/sok'
+  fullPaths: '/' | '/bidra' | '/nsfw' | '/om-prosjektet'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bidra' | '/om-prosjektet' | '/sok'
-  id: '__root__' | '/' | '/bidra' | '/om-prosjektet' | '/sok'
+  to: '/' | '/bidra' | '/nsfw' | '/om-prosjektet'
+  id: '__root__' | '/' | '/bidra' | '/nsfw' | '/om-prosjektet'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   BidraLazyRoute: typeof BidraLazyRoute
+  NsfwLazyRoute: typeof NsfwLazyRoute
   OmProsjektetLazyRoute: typeof OmProsjektetLazyRoute
-  SokLazyRoute: typeof SokLazyRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   BidraLazyRoute: BidraLazyRoute,
+  NsfwLazyRoute: NsfwLazyRoute,
   OmProsjektetLazyRoute: OmProsjektetLazyRoute,
-  SokLazyRoute: SokLazyRoute,
 }
 
 export const routeTree = rootRoute
@@ -139,8 +139,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/bidra",
-        "/om-prosjektet",
-        "/sok"
+        "/nsfw",
+        "/om-prosjektet"
       ]
     },
     "/": {
@@ -149,11 +149,11 @@ export const routeTree = rootRoute
     "/bidra": {
       "filePath": "bidra.lazy.tsx"
     },
+    "/nsfw": {
+      "filePath": "nsfw.lazy.tsx"
+    },
     "/om-prosjektet": {
       "filePath": "om-prosjektet.lazy.tsx"
-    },
-    "/sok": {
-      "filePath": "sok.lazy.tsx"
     }
   }
 }

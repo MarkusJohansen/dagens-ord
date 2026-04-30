@@ -13,10 +13,19 @@ export const fetchAllExpressions = async () => {
 
 export const fetchExpression = async () => {
   const { data, error } = await supabase
-  .from("random_expression")
-  .select("*")
-  .eq("nsfw", false)
-  .limit(1); 
+    .from("random_expression")
+    .select("*")
+    .eq("nsfw", false)
+    .limit(1);
+  return { data, error };
+};
+
+export const fetchNsfwExpression = async () => {
+  const { data, error } = await supabase
+    .from("random_expression")
+    .select("*")
+    .eq("nsfw", true)
+    .limit(1);
   return { data, error };
 };
 
@@ -31,14 +40,5 @@ export const suggestNewExpression = async (expression: SuggestExpression) => {
 
 export const fetchSuggestionRowCount = async () => {
   const { data, error } = await supabase.from("suggestions").select("id");
-  return { data, error };
-};
-
-export const searchExpression = async (query: string) => {
-  const { data, error } = await supabase
-    .from("expressions")
-    .select()
-    .ilike("expression", `%${query}%`) // Case-insensitive partial match
-    .eq("nsfw", false);
   return { data, error };
 };
