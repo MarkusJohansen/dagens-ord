@@ -19,11 +19,14 @@ export const SuggestionForm = () => {
     setWord("");
     setExample("");
     setExplanation("");
-  }
+  };
+
+  const inputClass =
+    "brutal-input w-full h-10 px-3 font-medium mt-1 block";
 
   return (
-    <form className="flex flex-col gap-2" onSubmit={onFormSubmit}>
-      <label htmlFor="word">
+    <form className="flex flex-col gap-4" onSubmit={onFormSubmit}>
+      <label className="font-black uppercase tracking-widest text-sm">
         Ord eller uttrykk:
         <input
           type="text"
@@ -31,11 +34,11 @@ export const SuggestionForm = () => {
           placeholder="En vinge"
           value={word}
           onChange={(e) => setWord(e.target.value)}
-          className="placeholder:text-light-gray border-black focus:shadow-xl"
+          className={inputClass}
           style={{ background: color }}
         />
       </label>
-      <label htmlFor="example">
+      <label className="font-black uppercase tracking-widest text-sm">
         Eksempel:
         <input
           type="text"
@@ -43,11 +46,11 @@ export const SuggestionForm = () => {
           placeholder="Skal du ha deg en vinge eller?"
           value={example}
           onChange={(e) => setExample(e.target.value)}
-          className="placeholder:text-light-gray border-black focus:shadow-xl"
+          className={inputClass}
           style={{ background: color }}
         />
       </label>
-      <label htmlFor="explanation">
+      <label className="font-black uppercase tracking-widest text-sm">
         Forklaring:
         <input
           type="text"
@@ -55,12 +58,15 @@ export const SuggestionForm = () => {
           placeholder="Et hardt slag"
           value={explanation}
           onChange={(e) => setExplanation(e.target.value)}
-          className="placeholder:text-light-gray border-black focus:shadow-xl"
+          className={inputClass}
           style={{ background: color }}
         />
       </label>
-      <button style={{ color: color }} className="focus:shadow-xl" onClick={() => suggest()}>
-        Send inn forslag
+      <button
+        className="brutal-btn bg-black text-white mt-2 w-full h-12 text-base"
+        onClick={() => suggest()}
+      >
+        SEND INN FORSLAG →
       </button>
     </form>
   );

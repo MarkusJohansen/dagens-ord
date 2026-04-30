@@ -21,32 +21,32 @@ const Sidebar = ({
 }: SidebarProps) => {
   return (
     <div
-      className={`fixed top-0 right-0 h-screen bg-white z-50 transition-transform duration-300 ease-in-out ${
+      className={`fixed top-0 right-0 h-screen z-50 transition-transform duration-300 ease-in-out border-l-4 border-black ${
         sidebarOpen ? "translate-x-0" : "translate-x-full"
       }`}
-      style={{
-        backgroundColor: color,
-      }}
+      style={{ backgroundColor: color }}
     >
-      <div className="flex flex-col h-full w-64 p-4">
+      <div className="flex flex-col h-full w-72 p-5 gap-6">
         <div className="flex justify-end">
-          <button onClick={toggleSidebar} className="bg-transparent text-black active:bg-black active:bg-opacity-30 active:border-none">
-            X
+          <button
+            onClick={toggleSidebar}
+            className="border-2 border-black px-3 py-1 font-black text-sm shadow-brutal-sm bg-black text-white uppercase tracking-widest active:shadow-none active:translate-x-[2px] active:translate-y-[2px] transition-all"
+          >
+            LUKK ✕
           </button>
         </div>
-        <div className="flex-1">
-          <div className="mb-4">
-            <SearchBar
-              query={query}
-              setQuery={setQuery}
-              handleSearch={handleSearch}
-              color={color}
-            />
-          </div>
-          <div className="mb-4" onClick={toggleSidebar}>
+        <div className="flex flex-col gap-6">
+          <SearchBar
+            query={query}
+            setQuery={setQuery}
+            handleSearch={handleSearch}
+            color={color}
+          />
+          <div
+            className="border-t-2 border-black pt-4 flex flex-col gap-4"
+            onClick={toggleSidebar}
+          >
             <Navlink to="/om-prosjektet" label="Om prosjektet" />
-          </div>
-          <div className="mb-4" onClick={toggleSidebar}>
             <Navlink to="/bidra" label="Bidra" />
           </div>
         </div>

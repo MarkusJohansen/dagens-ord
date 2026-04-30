@@ -1,13 +1,15 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
-import Navbar from "../components/navbar";
+import { SiteMenu } from "../components/site-menu";
 import { Toaster } from "react-hot-toast";
 
 export const Route = createRootRoute({
   component: () => (
-    <div className="min-h-screen flex flex-col">
+    <div className="h-screen flex flex-col overflow-hidden">
       <Toaster position="top-center" reverseOrder={false} />
-      <Navbar />
-      <Outlet />
+      <SiteMenu />
+      <div className="flex-1 overflow-y-auto flex flex-col">
+        <Outlet />
+      </div>
     </div>
   ),
 });

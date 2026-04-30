@@ -6,11 +6,10 @@ interface ExpressionProps {
 
 export const Expression = ({ word, example, explanation }: ExpressionProps) => {
   return (
-    <div className="text-left w-full">
-      <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold">{word}</h1>
-      <hr />
-      <h2 className="text-lg md:text-xl lg:text-2xl mb-2 ">{example}</h2>
-      <p className="md:text-lg lg:text-xl">{explanation}</p>
+    <div className="text-left w-full border-2 border-black border-b-0 last:border-b-2 p-5 hover:bg-black hover:text-white transition-colors group">
+      <p className="text-xl font-black uppercase tracking-wide">{word}</p>
+      <p className="italic font-medium mt-1 group-hover:text-white">{example}</p>
+      <p className="text-sm mt-1 opacity-70 group-hover:opacity-90">{explanation}</p>
     </div>
   );
 };

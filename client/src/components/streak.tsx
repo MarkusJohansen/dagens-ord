@@ -8,7 +8,6 @@ const Streak = () => {
   const lastFetchDate = localStorage.getItem("lastFetchDate");
   const [streak, setStreak] = useState(0);
 
-  // Set streak
   useEffect(() => {
     if (lastFetchDate == yesterday && cachedStreak) {
       setStreak(1 + parseInt(cachedStreak.valueOf()));
@@ -19,16 +18,15 @@ const Streak = () => {
       setStreak(0);
       localStorage.setItem("streak", "0");
     }
-  }, [])
+  }, []);
 
   if (streak > 0) return (
-    <div className="flex mr-8 items-center">
-      <FaFire size={22}/>
-      <p className="text-2xl font-semibold ml-1 font-logo">
-        {streak}
-      </p>
+    <div className="flex items-center gap-1 border-2 border-black px-2 py-1 shadow-brutal-sm bg-white mr-3">
+      <FaFire size={18} className="text-black" />
+      <span className="text-lg font-black">{streak}</span>
     </div>
-  ); else return <></>
+  );
+  return <></>;
 };
 
 export default Streak;

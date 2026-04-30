@@ -10,10 +10,9 @@ interface SearchBarProps {
 }
 
 const SearchBar = (props: SearchBarProps) => {
-  const { query, setQuery, handleSearch, color } = props;
+  const { query, setQuery, handleSearch } = props;
   const router = useRouter();
 
-  // Reset query when the URL changes
   useEffect(() => {
     if (!router.state.location.pathname.includes("search")) setQuery("");
   }, [router.state.location.pathname]);
@@ -23,20 +22,19 @@ const SearchBar = (props: SearchBarProps) => {
   };
 
   return (
-    <div className="gap-1 flex flex-row md:justify-end">
+    <div className="flex flex-row">
       <input
         value={query}
-        placeholder="Søk..."
+        placeholder="SØK..."
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
-        className="m-0 focus:shadow-none h-10 w-1/2 md:w-100 bg-transparent border-black border-2 placeholder:text-light-gray"
+        className="brutal-input h-10 w-full md:w-48 px-3 font-bold uppercase tracking-wide text-sm"
       />
       <button
         onClick={handleSearch}
-        className="focus:shadow-none hover:bg-gray-600 h-10"
-        style={{ color: color }}
+        className="brutal-btn h-10 px-3 bg-black text-white border-l-0"
       >
-        <FaSearch color={color} />
+        <FaSearch />
       </button>
     </div>
   );

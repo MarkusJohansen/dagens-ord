@@ -1,11 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/img/logo.png";
 
 const Logo = () => {
   return (
     <Link to="/">
-      <div className="mx-2 my-auto h-full">
-        <img src={logo} alt="logo" className="w-16" />
+      <div className="border-2 border-black px-3 py-1 shadow-brutal-sm bg-black text-white font-black uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-colors">
+        DAGENS ORD
       </div>
     </Link>
   );
