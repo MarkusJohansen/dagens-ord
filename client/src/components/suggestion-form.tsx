@@ -22,7 +22,7 @@ export const SuggestionForm = () => {
   };
 
   const inputClass =
-    "brutal-input w-full h-10 px-3 font-medium mt-1 block";
+    "brutal-input w-full h-10 px-3 font-medium mt-1 block placeholder:text-black placeholder:opacity-60";
 
   return (
     <form className="flex flex-col gap-4" onSubmit={onFormSubmit}>

@@ -13,13 +13,9 @@ function Index() {
   const { color } = useContext(ColorContext);
   const { expression, isLoading } = useGetNewExpression();
 
-  const word = isLoading || !expression ? "..." : expression.expression.toUpperCase();
-  const example = isLoading || !expression
-    ? '"Her kommer et eksempel på bruk av uttrykket"'
-    : expression.example;
-  const explanation = isLoading || !expression
-    ? "Og en forklaring på hva uttrykket betyr"
-    : expression.definition;
+  const word = expression?.expression.toUpperCase() ?? "";
+  const example = expression?.example ?? "";
+  const explanation = expression?.definition ?? "";
 
   const { displayed, done } = useTypewriter(word, 50);
   const { ref, fontSize } = useFitText(word);
@@ -36,23 +32,15 @@ function Index() {
         </h1>
       </div>
 
-      <div className="border-t-4 border-black shrink-0">
-        <div className="page-padding grid grid-cols-1 md:grid-cols-2">
-          <div className="py-5 md:border-r-2 border-black md:pr-10 border-b-2 md:border-b-0">
-            <p className="font-black text-[10px] uppercase tracking-[0.3em] mb-2 opacity-40">
-              EKSEMPEL
-            </p>
-            <p className="text-base md:text-lg font-medium italic leading-snug">
-              {example}
-            </p>
+      <div className="md:border-t-4 border-black shrink-0">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="pl-5 md:pl-10 lg:pl-32 border-t-2 md:border-t-0 border-black py-5 md:border-r-2 md:pr-10">
+            <p className="font-black text-[10px] uppercase tracking-[0.3em] mb-2 opacity-40">EKSEMPEL</p>
+            <p className="text-base md:text-lg font-medium italic leading-snug">{example}</p>
           </div>
-          <div className="py-5 md:pl-10">
-            <p className="font-black text-[10px] uppercase tracking-[0.3em] mb-2 opacity-40">
-              FORKLARING
-            </p>
-            <p className="text-base md:text-lg font-medium leading-snug">
-              {explanation}
-            </p>
+          <div className="pl-5 md:pl-10 lg:pl-32 border-t-2 md:border-t-0 border-black py-5">
+            <p className="font-black text-[10px] uppercase tracking-[0.3em] mb-2 opacity-40">FORKLARING</p>
+            <p className="text-base md:text-lg font-medium leading-snug">{explanation}</p>
           </div>
         </div>
       </div>

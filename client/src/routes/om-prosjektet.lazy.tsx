@@ -11,7 +11,7 @@ function About() {
   const { color } = useContext(ColorContext);
   return (
     <div
-      className="page-padding flex-1 h-full w-screen flex items-center justify-center py-16"
+      className="page-padding flex-1 w-screen flex flex-col items-center py-16"
       style={{ backgroundColor: color }}
     >
       <div className="flex flex-col gap-6 w-full lg:w-2/3 xl:w-1/2 border-4 border-black shadow-brutal-lg p-8 bg-white">
