@@ -66,7 +66,7 @@ export const deleteSuggestion = async (suggestion: Suggestion) => {
 };
 
 export const updateExpression = async (expr: ExpressionRecord) => {
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("expressions")
     .update({
       expression: expr.expression,
@@ -74,8 +74,12 @@ export const updateExpression = async (expr: ExpressionRecord) => {
       definition: expr.definition,
       nsfw: expr.nsfw,
     })
-    .eq("id", expr.id);
+    .eq("id", expr.id)
+    .select();
 
+  if (!error && (!data || data.length === 0)) {
+    return { error: { message: "Ingen rad oppdatert — sjekk RLS-regler i Supabase." } };
+  }
   return { error };
 };
 
