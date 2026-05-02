@@ -278,6 +278,15 @@
               on:click={() => (expressionFlagFilter = expressionFlagFilter === 'flagged' ? 'all' : 'flagged')}
             >⚠ Mangler</button>
           </div>
+          <div class="flex items-center justify-between mb-3 min-h-[28px]">
+            <span class="text-xs font-bold uppercase tracking-widest text-gray-500">
+              {#if filteredExpressions.length === expressions.length}
+                {expressions.length} uttrykk
+              {:else}
+                {filteredExpressions.length} av {expressions.length} uttrykk
+              {/if}
+            </span>
+          </div>
 
           {#if expressionsLoading}
             <div class="flex items-center justify-center py-16">

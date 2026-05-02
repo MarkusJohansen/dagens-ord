@@ -179,8 +179,9 @@
           on:click={() => (pendingAction = "reject")}
         >Avslå</button>
         <button
-          class="brutal-btn bg-brutal-teal text-black text-xs flex-1"
+          class="brutal-btn bg-brutal-teal text-black text-xs flex-1 disabled:opacity-40 disabled:cursor-not-allowed"
           on:click={() => (pendingAction = "approve")}
+          disabled={lowQuality}
         >Godkjenn</button>
       </div>
     {/if}
@@ -277,7 +278,7 @@
       {:else}
         <div class="flex gap-2">
           <button class="brutal-btn bg-brutal-pink text-white text-xs" on:click={() => (pendingAction = "reject")}>Avslå</button>
-          <button class="brutal-btn bg-brutal-teal text-black text-xs" on:click={() => (pendingAction = "approve")}>Godkjenn</button>
+          <button class="brutal-btn bg-brutal-teal text-black text-xs disabled:opacity-40 disabled:cursor-not-allowed" on:click={() => (pendingAction = "approve")} disabled={lowQuality}>Godkjenn</button>
         </div>
       {/if}
     </td>
