@@ -205,18 +205,11 @@
                   <option value="alpha">A → Å</option>
                   <option value="alpha-desc">Å → A</option>
                 </select>
-                <div class="flex border-2 border-black shrink-0">
-                  <button
-                    class="px-3 h-10 font-black uppercase tracking-wide text-xs transition-colors border-r-2 border-black
-                      {suggestionFlagFilter === 'all' ? 'bg-black text-white' : 'bg-white hover:bg-brutal-yellow/60'}"
-                    on:click={() => (suggestionFlagFilter = "all")}
-                  >Alle</button>
-                  <button
-                    class="px-3 h-10 font-black uppercase tracking-wide text-xs transition-colors flex items-center gap-1.5
-                      {suggestionFlagFilter === 'flagged' ? 'bg-brutal-orange text-white border-brutal-orange' : 'bg-white hover:bg-brutal-orange/10'}"
-                    on:click={() => (suggestionFlagFilter = "flagged")}
-                  >⚠ Flagget</button>
-                </div>
+                <button
+                  class="px-3 h-10 border-2 border-black font-black uppercase tracking-wide text-xs transition-colors flex items-center gap-1.5 shrink-0
+                    {suggestionFlagFilter === 'flagged' ? 'bg-brutal-orange text-white' : 'bg-white hover:bg-brutal-orange/10'}"
+                  on:click={() => (suggestionFlagFilter = suggestionFlagFilter === 'flagged' ? 'all' : 'flagged')}
+                >⚠ Mangler</button>
               </div>
 
               {#if suggestionsLoading}
@@ -279,18 +272,11 @@
                 >{opt.label}</button>
               {/each}
             </div>
-            <div class="flex border-2 border-black shrink-0">
-              <button
-                class="px-3 h-10 font-black uppercase tracking-wide text-xs transition-colors border-r-2 border-black
-                  {expressionFlagFilter === 'all' ? 'bg-black text-white' : 'bg-white hover:bg-brutal-yellow/60'}"
-                on:click={() => (expressionFlagFilter = "all")}
-              >Alle</button>
-              <button
-                class="px-3 h-10 font-black uppercase tracking-wide text-xs transition-colors flex items-center gap-1.5
-                  {expressionFlagFilter === 'flagged' ? 'bg-brutal-orange text-white' : 'bg-white hover:bg-brutal-orange/10'}"
-                on:click={() => (expressionFlagFilter = "flagged")}
-              >⚠ Flagget</button>
-            </div>
+            <button
+              class="px-3 h-10 border-2 border-black font-black uppercase tracking-wide text-xs transition-colors flex items-center gap-1.5 shrink-0
+                {expressionFlagFilter === 'flagged' ? 'bg-brutal-orange text-white' : 'bg-white hover:bg-brutal-orange/10'}"
+              on:click={() => (expressionFlagFilter = expressionFlagFilter === 'flagged' ? 'all' : 'flagged')}
+            >⚠ Mangler</button>
           </div>
 
           {#if expressionsLoading}

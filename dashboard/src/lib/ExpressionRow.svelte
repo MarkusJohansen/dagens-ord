@@ -62,9 +62,12 @@
             on:input={(e) => updateField(e, "expression")}
           >{expression.expression}</div>
         {:else}
-          <button class="text-left font-black text-lg w-full hover:underline" on:click={() => (editExpr = true)}>
-            {expression.expression}
-          </button>
+          <div class="flex flex-wrap items-center gap-1.5">
+            <button class="text-left font-black text-lg hover:underline" on:click={() => (editExpr = true)}>
+              {expression.expression}
+            </button>
+            {#if lowQuality}<span class="inline-flex items-center gap-1 border-2 border-black bg-brutal-orange text-white text-xs font-black px-2 py-0.5">⚠ MANGLER INFO</span>{/if}
+          </div>
         {/if}
       </div>
       <label class="flex flex-col items-center gap-1 cursor-pointer shrink-0">
@@ -126,7 +129,7 @@
           on:keydown={handleKeydown} on:blur={saveEdit} on:input={(e) => updateField(e, "expression")}
         >{expression.expression}</div>
       {:else}
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-1.5">
           <span class="font-semibold">{expression.expression}</span>
           {#if lowQuality}
             <span class="inline-flex items-center gap-1 border-2 border-black bg-brutal-orange text-white text-xs font-black px-2 py-0.5 shrink-0">⚠ MANGLER INFO</span>

@@ -84,10 +84,7 @@
         class="w-4 h-4 mt-1 cursor-pointer accent-brutal-teal shrink-0"
       />
       <div class="flex-1 min-w-0">
-        <div class="flex items-center gap-2 mb-1">
-          <span class="font-black uppercase tracking-widest text-xs text-gray-500">Uttrykk</span>
-          {#if lowQuality}<span class="text-xs font-black bg-brutal-orange text-white px-2 py-0.5 uppercase tracking-wide">Mangler info</span>{/if}
-        </div>
+        <span class="font-black uppercase tracking-widest text-xs text-gray-500 block mb-1">Uttrykk</span>
         {#if editExpression}
           <div
             contenteditable="true"
@@ -100,11 +97,14 @@
             on:input={(e) => updateField(e, "expression")}
           >{suggestion.expression}</div>
         {:else}
-          <button
-            class="text-left font-black text-lg w-full hover:underline"
-            on:click={() => (editExpression = true)}
-            title="Trykk for å redigere"
-          >{suggestion.expression}</button>
+          <div class="flex flex-wrap items-center gap-1.5">
+            <button
+              class="text-left font-black text-lg hover:underline"
+              on:click={() => (editExpression = true)}
+              title="Trykk for å redigere"
+            >{suggestion.expression}</button>
+            {#if lowQuality}<span class="inline-flex items-center gap-1 border-2 border-black bg-brutal-orange text-white text-xs font-black px-2 py-0.5">⚠ MANGLER INFO</span>{/if}
+          </div>
         {/if}
       </div>
       <label class="flex flex-col items-center gap-1 cursor-pointer shrink-0">
@@ -212,7 +212,7 @@
           on:input={(e) => updateField(e, "expression")}
         >{suggestion.expression}</div>
       {:else}
-        <div class="flex items-center gap-2">
+        <div class="flex flex-wrap items-center gap-1.5">
           <span class="font-semibold">{suggestion.expression}</span>
           {#if lowQuality}
             <span class="inline-flex items-center gap-1 border-2 border-black bg-brutal-orange text-white text-xs font-black px-2 py-0.5 shrink-0">⚠ MANGLER INFO</span>
