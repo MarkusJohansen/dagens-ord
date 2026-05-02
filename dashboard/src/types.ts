@@ -8,6 +8,14 @@ export type Suggestion = {
 export type Expression = {
   expression: string;
   example: string;
-  definition: string;  
+  definition: string;
+  nsfw: boolean;
+};
+
+export type ExpressionRecord = {
+  id: number;
+  expression: string;
+  example: string;
+  definition: string;
   nsfw: boolean;
 };

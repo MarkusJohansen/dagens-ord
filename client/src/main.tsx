@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import "./style.css";
-import "chimeracss/build/chimera-plain.css";
 import { ColorProvider } from "@/color-context";
 import { routeTree } from "./routeTree.gen";
 import { createRouter, RouterProvider } from "@tanstack/react-router";

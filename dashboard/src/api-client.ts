@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import type { Expression, Suggestion } from "./types";
+import type { Expression, ExpressionRecord, Suggestion } from "./types";
 
 export const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
@@ -18,9 +18,10 @@ export const getSuggestions = async () => {
 export const getExpressions = async () => {
   const { data, count, error } = await supabase
     .from("expressions")
-    .select("*", { count: "exact" });
+    .select("*", { count: "exact" })
+    .order("expression", { ascending: true });
 
-  return { data, count, error };
+  return { data: data as ExpressionRecord[] | null, count, error };
 };
 
 export const addSuggestion = async (suggestion: Expression) => {
@@ -29,12 +30,10 @@ export const addSuggestion = async (suggestion: Expression) => {
     .select("*")
     .eq("expression", suggestion.expression);
 
-  if (selectError) {
-    return { error: selectError };
-  }
+  if (selectError) return { error: selectError };
 
   if (existingSuggestions && existingSuggestions.length > 0) {
-    return { error: { message: "Dette uttrykket finnes allerede i databasen." }};
+    return { error: { message: "Dette uttrykket finnes allerede i databasen." } };
   }
 
   const { error: insertError } = await supabase
@@ -58,12 +57,35 @@ export const updateSuggestion = async (suggestion: Suggestion) => {
 };
 
 export const deleteSuggestion = async (suggestion: Suggestion) => {
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("suggestions")
     .delete()
     .eq("id", suggestion.id);
 
-  return { data, error };
+  return { error };
+};
+
+export const updateExpression = async (expr: ExpressionRecord) => {
+  const { error } = await supabase
+    .from("expressions")
+    .update({
+      expression: expr.expression,
+      example: expr.example,
+      definition: expr.definition,
+      nsfw: expr.nsfw,
+    })
+    .eq("id", expr.id);
+
+  return { error };
+};
+
+export const deleteExpression = async (id: number) => {
+  const { error } = await supabase
+    .from("expressions")
+    .delete()
+    .eq("id", id);
+
+  return { error };
 };
 
 export const signIn = async (userEmail: string, userPassword: string) => {
@@ -77,6 +99,5 @@ export const signIn = async (userEmail: string, userPassword: string) => {
 
 export const signOut = async () => {
   const { error } = await supabase.auth.signOut();
-
   return { error };
 };

@@ -48,6 +48,7 @@ export const SuggestionForm = () => {
           onChange={(e) => setExample(e.target.value)}
           className={inputClass}
           style={{ background: color }}
+          minLength={4}
         />
       </label>
       <label className="font-black uppercase tracking-widest text-sm">
@@ -60,6 +61,7 @@ export const SuggestionForm = () => {
           onChange={(e) => setExplanation(e.target.value)}
           className={inputClass}
           style={{ background: color }}
+          minLength={4}
         />
       </label>
       <button

@@ -16,7 +16,6 @@
     "@tanstack/router-devtools": "^1.38.1",
     "@tanstack/router-vite-plugin": "^1.38.0",
     "axios": "^1.6.7",
-    "chimeracss": "^1.4.4",
     "clsx": "^2.1.1",
     "postcss": "^8.4.35",
     "postcss-cli": "^11.0.0",
