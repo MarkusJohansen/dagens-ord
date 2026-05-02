@@ -117,7 +117,6 @@
   </div>
 {:else}
   <tr class="border-b-2 border-black even:bg-brutal-yellow/20 hover:bg-brutal-yellow/40 transition-colors">
-    <td class="px-4 py-3 text-sm font-medium border-r-2 border-black whitespace-nowrap">{expression.id}</td>
     <td class="px-4 py-3 border-r-2 border-black cursor-pointer" on:click={() => (editExpr = true)}>
       {#if editExpr}
         <div contenteditable="true" role="textbox" aria-multiline="false" tabindex="0"

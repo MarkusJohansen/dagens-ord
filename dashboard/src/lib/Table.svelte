@@ -18,7 +18,6 @@
   <table class="w-full border-2 border-black border-collapse">
     <thead>
       <tr class="bg-black text-white">
-        <th class="px-4 py-3 text-left font-black uppercase tracking-wide text-xs border-r border-white/20 w-16">ID</th>
         <th class="px-4 py-3 text-left font-black uppercase tracking-wide text-xs border-r border-white/20">Uttrykk</th>
         <th class="px-4 py-3 text-left font-black uppercase tracking-wide text-xs border-r border-white/20">Eksempel</th>
         <th class="px-4 py-3 text-left font-black uppercase tracking-wide text-xs border-r border-white/20">Definisjon</th>

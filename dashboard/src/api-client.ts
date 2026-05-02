@@ -80,11 +80,15 @@ export const updateExpression = async (expr: ExpressionRecord) => {
 };
 
 export const deleteExpression = async (id: number) => {
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("expressions")
     .delete()
-    .eq("id", id);
+    .eq("id", id)
+    .select();
 
+  if (!error && (!data || data.length === 0)) {
+    return { error: { message: "Ingen rad slettet — sjekk RLS-regler i Supabase." } };
+  }
   return { error };
 };
 

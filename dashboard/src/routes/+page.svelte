@@ -250,7 +250,7 @@
           {:else}
             <!-- Mobile cards -->
             <div class="md:hidden flex flex-col gap-3">
-              {#each filteredExpressions as expr (expr.id)}
+              {#each filteredExpressions as expr}
                 <ExpressionRow expression={expr} mobile={true} on:delete={handleExpressionDeleted} />
               {/each}
             </div>
@@ -260,7 +260,6 @@
               <table class="w-full border-2 border-black border-collapse">
                 <thead>
                   <tr class="bg-black text-white">
-                    <th class="px-4 py-3 text-left font-black uppercase tracking-wide text-xs border-r border-white/20 w-16">ID</th>
                     <th class="px-4 py-3 text-left font-black uppercase tracking-wide text-xs border-r border-white/20">Uttrykk</th>
                     <th class="px-4 py-3 text-left font-black uppercase tracking-wide text-xs border-r border-white/20">Eksempel</th>
                     <th class="px-4 py-3 text-left font-black uppercase tracking-wide text-xs border-r border-white/20">Definisjon</th>
@@ -269,7 +268,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {#each filteredExpressions as expr (expr.id)}
+                  {#each filteredExpressions as expr}
                     <ExpressionRow expression={expr} on:delete={handleExpressionDeleted} />
                   {/each}
                 </tbody>
