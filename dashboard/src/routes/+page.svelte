@@ -10,8 +10,7 @@
   import type { Suggestion, ExpressionRecord } from "../types";
 
   let isLoggedIn = false;
-  let activeTab: "suggestions" | "expressions" = "suggestions";
-  let guidelinesOpen = false;
+  let activeTab: "suggestions" | "expressions" | "guidelines" = "suggestions";
 
   // Suggestions state
   let suggestions: Suggestion[] = [];
@@ -149,37 +148,19 @@
         >
           Uttrykk
         </button>
+        <button
+          class="px-5 py-2.5 font-black uppercase tracking-wide text-sm border-2 border-b-0 border-l-0 border-black transition-colors
+            {activeTab === 'guidelines' ? 'bg-black text-white' : 'bg-white text-black hover:bg-brutal-yellow/60'}"
+          on:click={() => (activeTab = "guidelines")}
+        >
+          Retningslinjer
+        </button>
       </div>
 
       <!-- Suggestions tab -->
       {#if activeTab === "suggestions"}
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-5">
-
-          <!-- Sidebar -->
-          <div class="lg:col-span-1 flex flex-col gap-4">
-            <Panel>
-              <button
-                class="w-full flex items-center justify-between font-black uppercase tracking-wide text-xs"
-                on:click={() => (guidelinesOpen = !guidelinesOpen)}
-              >
-                Retningslinjer
-                <span class="text-base">{guidelinesOpen ? "↑" : "↓"}</span>
-              </button>
-              {#if guidelinesOpen}
-                <ul class="text-sm space-y-2 list-none p-0 mt-3 border-t-2 border-black pt-3">
-                  <li class="flex gap-2"><span class="font-black shrink-0">→</span>Uttrykket må være norsk</li>
-                  <li class="flex gap-2"><span class="font-black shrink-0">→</span>Morsomt eller med morsom ordlyd</li>
-                  <li class="flex gap-2"><span class="font-black shrink-0">→</span>Forståelig for de fleste</li>
-                  <li class="flex gap-2"><span class="font-black shrink-0">→</span>Dialektnøytralt</li>
-                  <li class="flex gap-2"><span class="font-black shrink-0">→</span>Ikke rasistisk eller homofobisk</li>
-                </ul>
-              {/if}
-            </Panel>
-          </div>
-
-          <!-- Main content -->
-          <div class="lg:col-span-3">
-            <Panel>
+        <div>
+          <Panel>
               <!-- Controls -->
               <div class="flex flex-col sm:flex-row gap-3 mb-4">
                 <input
@@ -208,9 +189,22 @@
               {:else}
                 <Table list={filteredSuggestions} onSuggestionDeleted={handleSuggestionDeleted} />
               {/if}
-            </Panel>
-          </div>
+          </Panel>
         </div>
+
+      <!-- Guidelines tab -->
+      {:else if activeTab === "guidelines"}
+        <Panel>
+          <h2 class="font-black uppercase tracking-wide text-sm mb-4">Retningslinjer for uttrykk</h2>
+          <p class="text-sm mb-4">For at et uttrykk skal kunne bli godkjent må det oppfylle følgende krav:</p>
+          <ul class="text-sm space-y-3 list-none p-0">
+            <li class="flex gap-3 border-2 border-black p-3 bg-white shadow-brutal-sm"><span class="font-black shrink-0">→</span>Uttrykket må være norsk</li>
+            <li class="flex gap-3 border-2 border-black p-3 bg-white shadow-brutal-sm"><span class="font-black shrink-0">→</span>Morsomt eller med morsom ordlyd</li>
+            <li class="flex gap-3 border-2 border-black p-3 bg-white shadow-brutal-sm"><span class="font-black shrink-0">→</span>Forståelig for de fleste</li>
+            <li class="flex gap-3 border-2 border-black p-3 bg-white shadow-brutal-sm"><span class="font-black shrink-0">→</span>Dialektnøytralt — hvem som helst skal kunne bruke det</li>
+            <li class="flex gap-3 border-2 border-black p-3 bg-white shadow-brutal-sm"><span class="font-black shrink-0">→</span>Ikke rasistisk eller homofobisk</li>
+          </ul>
+        </Panel>
 
       <!-- Expressions tab -->
       {:else if activeTab === "expressions"}
