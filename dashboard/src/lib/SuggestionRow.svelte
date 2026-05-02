@@ -6,6 +6,9 @@
 
   export let suggestion: Suggestion;
   export let mobile = false;
+  export let isSelected = false;
+
+  $: lowQuality = suggestion.example.trim().length < 4 || suggestion.definition.trim().length < 4;
 
   let isTeit = false;
   let editExpression = false;
@@ -71,11 +74,20 @@
 
 {#if mobile}
   <!-- Mobile card view -->
-  <div class="bg-white border-2 border-black shadow-brutal flex flex-col gap-4 p-4">
-    <!-- Expression + NSFW toggle -->
+  <div class="bg-white border-2 border-black shadow-brutal flex flex-col gap-4 p-4 {isSelected ? 'border-brutal-blue' : ''}">
+    <!-- Checkbox + Expression + NSFW toggle -->
     <div class="flex items-start justify-between gap-3">
+      <input
+        type="checkbox"
+        checked={isSelected}
+        on:click={() => dispatch("toggle")}
+        class="w-4 h-4 mt-1 cursor-pointer accent-brutal-teal shrink-0"
+      />
       <div class="flex-1 min-w-0">
-        <span class="font-black uppercase tracking-widest text-xs text-gray-500 block mb-1">Uttrykk</span>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="font-black uppercase tracking-widest text-xs text-gray-500">Uttrykk</span>
+          {#if lowQuality}<span class="text-xs font-black bg-brutal-orange text-white px-2 py-0.5 uppercase tracking-wide">Mangler info</span>{/if}
+        </div>
         {#if editExpression}
           <div
             contenteditable="true"
@@ -175,7 +187,15 @@
   </div>
 {:else}
   <!-- Desktop table row -->
-  <tr class="border-b-2 border-black even:bg-brutal-yellow/20 hover:bg-brutal-yellow/40 transition-colors">
+  <tr class="border-b-2 border-black transition-colors {isSelected ? 'bg-brutal-blue/10' : 'even:bg-brutal-yellow/20 hover:bg-brutal-yellow/40'}">
+    <td class="px-3 py-3 border-r-2 border-black text-center w-10">
+      <input
+        type="checkbox"
+        checked={isSelected}
+        on:click={() => dispatch("toggle")}
+        class="w-4 h-4 cursor-pointer accent-brutal-teal"
+      />
+    </td>
     <td
       class="px-4 py-3 border-r-2 border-black cursor-pointer"
       on:click={() => (editExpression = true)}
@@ -192,7 +212,12 @@
           on:input={(e) => updateField(e, "expression")}
         >{suggestion.expression}</div>
       {:else}
-        <span class="font-semibold">{suggestion.expression}</span>
+        <div class="flex items-center gap-2">
+          <span class="font-semibold">{suggestion.expression}</span>
+          {#if lowQuality}
+            <span class="inline-flex items-center gap-1 border-2 border-black bg-brutal-orange text-white text-xs font-black px-2 py-0.5 shrink-0">⚠ MANGLER INFO</span>
+          {/if}
+        </div>
       {/if}
     </td>
     <td

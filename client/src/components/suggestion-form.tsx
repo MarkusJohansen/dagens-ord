@@ -14,8 +14,11 @@ export const SuggestionForm = () => {
     definition: explanation,
   });
 
+  const canSubmit = word.trim().length >= 1 && example.trim().length >= 4 && explanation.trim().length >= 4;
+
   const onFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+    if (!canSubmit) return;
     setWord("");
     setExample("");
     setExplanation("");
@@ -48,8 +51,12 @@ export const SuggestionForm = () => {
           onChange={(e) => setExample(e.target.value)}
           className={inputClass}
           style={{ background: color }}
-          minLength={4}
         />
+        {example.length > 0 && example.trim().length < 4 && (
+          <span className="text-xs font-bold text-brutal-pink mt-1 block normal-case tracking-normal">
+            Minst 4 tegn ({example.trim().length}/4)
+          </span>
+        )}
       </label>
       <label className="font-black uppercase tracking-widest text-sm">
         Forklaring:
@@ -61,12 +68,19 @@ export const SuggestionForm = () => {
           onChange={(e) => setExplanation(e.target.value)}
           className={inputClass}
           style={{ background: color }}
-          minLength={4}
         />
+        {explanation.length > 0 && explanation.trim().length < 4 && (
+          <span className="text-xs font-bold text-brutal-pink mt-1 block normal-case tracking-normal">
+            Minst 4 tegn ({explanation.trim().length}/4)
+          </span>
+        )}
       </label>
       <button
-        className="brutal-btn bg-black text-white mt-2 w-full h-12 text-base"
-        onClick={() => suggest()}
+        className={`brutal-btn bg-black text-white mt-2 w-full h-12 text-base transition-opacity ${
+          canSubmit ? "" : "opacity-40 cursor-not-allowed"
+        }`}
+        onClick={() => canSubmit && suggest()}
+        disabled={!canSubmit}
       >
         SEND INN FORSLAG →
       </button>

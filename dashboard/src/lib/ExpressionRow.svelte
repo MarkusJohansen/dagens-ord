@@ -7,6 +7,8 @@
   export let expression: ExpressionRecord;
   export let mobile = false;
 
+  $: lowQuality = expression.example.trim().length < 4 || expression.definition.trim().length < 4;
+
   let editExpr = false;
   let editExample = false;
   let editDefinition = false;
@@ -116,7 +118,7 @@
     {/if}
   </div>
 {:else}
-  <tr class="border-b-2 border-black even:bg-brutal-yellow/20 hover:bg-brutal-yellow/40 transition-colors">
+  <tr class="border-b-2 border-black transition-colors even:bg-brutal-yellow/20 hover:bg-brutal-yellow/40">
     <td class="px-4 py-3 border-r-2 border-black cursor-pointer" on:click={() => (editExpr = true)}>
       {#if editExpr}
         <div contenteditable="true" role="textbox" aria-multiline="false" tabindex="0"
@@ -124,7 +126,12 @@
           on:keydown={handleKeydown} on:blur={saveEdit} on:input={(e) => updateField(e, "expression")}
         >{expression.expression}</div>
       {:else}
-        <span class="font-semibold">{expression.expression}</span>
+        <div class="flex items-center gap-2">
+          <span class="font-semibold">{expression.expression}</span>
+          {#if lowQuality}
+            <span class="inline-flex items-center gap-1 border-2 border-black bg-brutal-orange text-white text-xs font-black px-2 py-0.5 shrink-0">⚠ MANGLER INFO</span>
+          {/if}
+        </div>
       {/if}
     </td>
     <td class="px-4 py-3 border-r-2 border-black cursor-pointer text-sm max-w-[200px]" on:click={() => (editExample = true)}>

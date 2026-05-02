@@ -2,7 +2,7 @@
   import "../app.css";
   import { SvelteToast, toast } from "@zerodevx/svelte-toast";
   import { onMount } from "svelte";
-  import { getExpressions, getSuggestions, signOut, supabase } from "../api-client";
+  import { addSuggestion, deleteSuggestion, getExpressions, getSuggestions, signOut, supabase } from "../api-client";
   import Panel from "../lib/Panel.svelte";
   import Table from "$lib/Table.svelte";
   import Login from "$lib/Login.svelte";
@@ -16,14 +16,15 @@
   let suggestions: Suggestion[] = [];
   let suggestionsLoading = true;
   let suggestionSearch = "";
-  let suggestionNsfwFilter: "all" | "nsfw" | "safe" = "all";
   let suggestionSort: "newest" | "alpha" | "alpha-desc" = "newest";
+  let suggestionFlagFilter: "all" | "flagged" = "all";
 
   // Expressions state
   let expressions: ExpressionRecord[] = [];
   let expressionsLoading = true;
   let expressionSearch = "";
   let expressionNsfwFilter: "all" | "nsfw" | "safe" = "all";
+  let expressionFlagFilter: "all" | "flagged" = "all";
   let expressionSort: "alpha" | "alpha-desc" | "newest" = "alpha";
 
   type NsfwFilter = "all" | "nsfw" | "safe";
@@ -33,8 +34,16 @@
     { val: "nsfw", label: "NSFW" },
   ];
 
+  function isLowQuality(example: string, definition: string) {
+    return example.trim().length < 4 || definition.trim().length < 4;
+  }
+
   $: filteredSuggestions = suggestions
-    .filter((s) => s.expression.toLowerCase().includes(suggestionSearch.toLowerCase()))
+    .filter((s) => {
+      const matchesSearch = s.expression.toLowerCase().includes(suggestionSearch.toLowerCase());
+      const matchesFlag = suggestionFlagFilter === "all" || isLowQuality(s.example, s.definition);
+      return matchesSearch && matchesFlag;
+    })
     .sort((a, b) =>
       suggestionSort === "alpha"
         ? a.expression.localeCompare(b.expression, "nb")
@@ -50,7 +59,8 @@
         expressionNsfwFilter === "all" ||
         (expressionNsfwFilter === "nsfw" && e.nsfw) ||
         (expressionNsfwFilter === "safe" && !e.nsfw);
-      return matchesSearch && matchesNsfw;
+      const matchesFlag = expressionFlagFilter === "all" || isLowQuality(e.example, e.definition);
+      return matchesSearch && matchesNsfw && matchesFlag;
     })
     .sort((a, b) =>
       expressionSort === "alpha"
@@ -78,6 +88,28 @@
 
   const handleSuggestionDeleted = () => {
     loadSuggestions();
+  };
+
+  const handleBulkApprove = async (e: CustomEvent<Suggestion[]>) => {
+    const selected = e.detail;
+    let approved = 0;
+    for (const s of selected) {
+      const { error } = await addSuggestion({ expression: s.expression, example: s.example, definition: s.definition, nsfw: false });
+      if (!error) { await deleteSuggestion(s); approved++; }
+    }
+    toast.push(`${approved} av ${selected.length} forslag godkjent ✓`);
+    await loadSuggestions();
+  };
+
+  const handleBulkReject = async (e: CustomEvent<Suggestion[]>) => {
+    const selected = e.detail;
+    let rejected = 0;
+    for (const s of selected) {
+      const { error } = await deleteSuggestion(s);
+      if (!error) rejected++;
+    }
+    toast.push(`${rejected} forslag avslått.`);
+    await loadSuggestions();
   };
 
   const handleExpressionDeleted = () => {
@@ -173,6 +205,18 @@
                   <option value="alpha">A → Å</option>
                   <option value="alpha-desc">Å → A</option>
                 </select>
+                <div class="flex border-2 border-black shrink-0">
+                  <button
+                    class="px-3 h-10 font-black uppercase tracking-wide text-xs transition-colors border-r-2 border-black
+                      {suggestionFlagFilter === 'all' ? 'bg-black text-white' : 'bg-white hover:bg-brutal-yellow/60'}"
+                    on:click={() => (suggestionFlagFilter = "all")}
+                  >Alle</button>
+                  <button
+                    class="px-3 h-10 font-black uppercase tracking-wide text-xs transition-colors flex items-center gap-1.5
+                      {suggestionFlagFilter === 'flagged' ? 'bg-brutal-orange text-white border-brutal-orange' : 'bg-white hover:bg-brutal-orange/10'}"
+                    on:click={() => (suggestionFlagFilter = "flagged")}
+                  >⚠ Flagget</button>
+                </div>
               </div>
 
               {#if suggestionsLoading}
@@ -187,7 +231,12 @@
                   </span>
                 </div>
               {:else}
-                <Table list={filteredSuggestions} onSuggestionDeleted={handleSuggestionDeleted} />
+                <Table
+                  list={filteredSuggestions}
+                  onSuggestionDeleted={handleSuggestionDeleted}
+                  on:bulkApprove={handleBulkApprove}
+                  on:bulkReject={handleBulkReject}
+                />
               {/if}
           </Panel>
         </div>
@@ -224,11 +273,23 @@
             <div class="flex border-2 border-black shrink-0">
               {#each nsfwFilterOptions as opt}
                 <button
-                  class="px-3 h-10 font-black uppercase tracking-wide text-xs transition-colors border-r-2 border-black last:border-r-0
+                  class="px-3 h-10 font-black uppercase tracking-wide text-xs transition-colors border-r-2 border-black
                     {expressionNsfwFilter === opt.val ? 'bg-black text-white' : 'bg-white hover:bg-brutal-yellow/60'}"
                   on:click={() => (expressionNsfwFilter = opt.val)}
                 >{opt.label}</button>
               {/each}
+            </div>
+            <div class="flex border-2 border-black shrink-0">
+              <button
+                class="px-3 h-10 font-black uppercase tracking-wide text-xs transition-colors border-r-2 border-black
+                  {expressionFlagFilter === 'all' ? 'bg-black text-white' : 'bg-white hover:bg-brutal-yellow/60'}"
+                on:click={() => (expressionFlagFilter = "all")}
+              >Alle</button>
+              <button
+                class="px-3 h-10 font-black uppercase tracking-wide text-xs transition-colors flex items-center gap-1.5
+                  {expressionFlagFilter === 'flagged' ? 'bg-brutal-orange text-white' : 'bg-white hover:bg-brutal-orange/10'}"
+                on:click={() => (expressionFlagFilter = "flagged")}
+              >⚠ Flagget</button>
             </div>
           </div>
 
